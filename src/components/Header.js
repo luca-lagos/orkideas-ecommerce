@@ -2,7 +2,7 @@ import { Pressable, StyleSheet, Text, View } from "react-native";
 import { Icon } from "react-native-elements";
 import React from "react";
 
-const Header = ({onHandleMenuModal}) => {
+const Header = ({ onHandleMenuModal, onHandleSearchModal }) => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -12,16 +12,27 @@ const Header = ({onHandleMenuModal}) => {
             onHandleMenuModal(true);
           }}
         >
-          <Icon name="menu" color={"white"} size={35} />
+          <Icon name="menu" color={"white"} size={35}/>
         </Pressable>
         <Pressable
           style={styles.search}
           onPress={() => {
-            console.log("OPEN SEARCH");
+            onHandleSearchModal(true);
           }}
+          marginLeft={3}
+          marginRight={5}
         >
           <Text>Search a product</Text>
           <Icon name="search" color={"#696969"} size={25} />
+        </Pressable>
+        <Pressable
+          style={styles.button}
+          onPress={() => {
+            console.log("OPEN CART");
+          }}
+          marginRight={-7}
+        >
+          <Icon name="account-circle" color={"white"} size={35} />
         </Pressable>
         <Pressable
           style={styles.button}
@@ -56,10 +67,10 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   button: {
-    width: "20%",
+    width: "15%",
   },
   search: {
-    width: "60%",
+    width: "55%",
     backgroundColor: "white",
     padding: 10,
     paddingLeft: 20,
