@@ -1,6 +1,8 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { Icon } from "react-native-elements";
 import React from "react";
+import colorCollection from "../utils/global/colors";
+import fonts from "../utils/global/fonts";
 
 const Header = ({ onHandleMenuModal, onHandleSearchModal }) => {
   return (
@@ -12,7 +14,7 @@ const Header = ({ onHandleMenuModal, onHandleSearchModal }) => {
             onHandleMenuModal(true);
           }}
         >
-          <Icon name="menu" color={"white"} size={35}/>
+          <Icon name="menu" color={colorCollection.textlight} size={35} />
         </Pressable>
         <Pressable
           style={styles.search}
@@ -22,8 +24,8 @@ const Header = ({ onHandleMenuModal, onHandleSearchModal }) => {
           marginLeft={3}
           marginRight={5}
         >
-          <Text>Search a product</Text>
-          <Icon name="search" color={"#696969"} size={25} />
+          <Text style={styles.searchText}>Search a product</Text>
+          <Icon name="search" color={colorCollection.textdark} size={25} />
         </Pressable>
         <Pressable
           style={styles.button}
@@ -32,7 +34,11 @@ const Header = ({ onHandleMenuModal, onHandleSearchModal }) => {
           }}
           marginRight={-7}
         >
-          <Icon name="account-circle" color={"white"} size={35} />
+          <Icon
+            name="account-circle"
+            color={colorCollection.textlight}
+            size={35}
+          />
         </Pressable>
         <Pressable
           style={styles.button}
@@ -40,7 +46,11 @@ const Header = ({ onHandleMenuModal, onHandleSearchModal }) => {
             console.log("OPEN CART");
           }}
         >
-          <Icon name="shopping-cart" color={"white"} size={35} />
+          <Icon
+            name="shopping-cart"
+            color={colorCollection.textlight}
+            size={35}
+          />
         </Pressable>
       </View>
     </View>
@@ -51,27 +61,26 @@ export default Header;
 
 const styles = StyleSheet.create({
   container: {
-    height: 130,
-    backgroundColor: "red",
+    backgroundColor: colorCollection.darkviolet,
     display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    paddingLeft: 10,
-    paddingRight: 10,
+    flexDirection: "column",
+    alignItems: "center", 
   },
   header: {
-    marginTop: 30,
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
+    marginTop: 35,
+    paddingVertical: 30,
+    paddingHorizontal: 10
   },
   button: {
     width: "15%",
   },
   search: {
     width: "55%",
-    backgroundColor: "white",
+    backgroundColor: colorCollection.textlight,
     padding: 10,
     paddingLeft: 20,
     paddingRight: 20,
@@ -80,6 +89,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    color: "#696969",
+    color: colorCollection.textdark,
   },
+  searchText: {
+    fontFamily: fonts.Josefin,
+  }
 });

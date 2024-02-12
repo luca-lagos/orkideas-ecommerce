@@ -3,6 +3,7 @@ import { Icon } from "react-native-elements";
 import React from "react";
 import ProductCard from "../../components/ProductCard";
 import SearchInput from "../../components/SearchInput";
+import colorCollection from "../../utils/global/colors";
 
 const Search = ({ modalSearchVisible, onHandleSearchModal, products, onSearchProductQuery, searchProductQuery }) => {
 
@@ -16,7 +17,7 @@ const Search = ({ modalSearchVisible, onHandleSearchModal, products, onSearchPro
         />
         {products.length === 0 ? (
           <View style={styles.notFoundView}>
-            <Icon name="help" size={120} color="#515151" />
+            <Icon name="help" size={120} color={colorCollection.darkviolet} />
             <Text style={styles.notFoundText}>
               Please, search for your favourite product
             </Text>
@@ -44,7 +45,7 @@ const styles = StyleSheet.create({
     height: "100%",
     display: "flex",
     flexDirection: "column",
-    backgroundColor: "#e8e8e8",
+    backgroundColor: colorCollection.lightviolet,
   },
   productList: {
     marginHorizontal: 10,
@@ -63,7 +64,7 @@ const styles = StyleSheet.create({
   notFoundText: {
     fontSize: 20,
     fontWeight: "bold",
-    color: "#515151",
+    color: colorCollection.darkviolet,
     textAlign: "center",
   },
 });

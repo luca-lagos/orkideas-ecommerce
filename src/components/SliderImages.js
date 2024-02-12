@@ -1,7 +1,8 @@
 import { StyleSheet, View, StatusBar, FlatList, Image } from "react-native";
 import React from "react";
 
-const SliderImages = ({ images }) => {
+const SliderImages = ({images}) => {
+  console.log(images);
   return (
     <View style={styles.container}>
       <StatusBar hidden />
@@ -11,12 +12,11 @@ const SliderImages = ({ images }) => {
         horizontal
         pagingEnabled
         renderItem={({ item }) => {
-          <View style={styles.imageContainer}>
-            <Image
-              src={item}
-              style={styles.image}
-            />
-          </View>;
+          return (
+            <View style={styles.imageContainer}>
+              <Image src={item} style={styles.image} />
+            </View>
+          );
         }}
         keyExtractor={(item) => item}
       />
@@ -36,7 +36,6 @@ const styles = StyleSheet.create({
   flatList: {
     height: 300,
     width: "92%",
-    backgroundColor: "red",
     borderRadius: 10,
   },
   imageContainer: {
@@ -46,6 +45,6 @@ const styles = StyleSheet.create({
   image: {
     height: 300,
     width: "92%",
-    resizeMode: "cover"
+    resizeMode: "cover",
   },
 });

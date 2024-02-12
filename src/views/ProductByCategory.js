@@ -10,6 +10,8 @@ import React from "react";
 import ProductCard from "../components/ProductCard";
 import { useState, useEffect } from "react";
 import { useRoute } from "@react-navigation/native";
+import NavigationButtons from "../components/NavigationButtons";
+import colorCollection from "../utils/global/colors";
 
 const ProductByCategory = () => {
   const route = useRoute();
@@ -31,13 +33,14 @@ const ProductByCategory = () => {
       <ImageBackground
         style={styles.categoryBanner}
         src="https://www.1800flowers.com/blog/wp-content/uploads/2021/05/Birthday-Flowers-Colors.jpg"
-        imageStyle={{backgroundColor: "black", opacity: 0.7}}
+        imageStyle={{backgroundColor: colorCollection.textdark, opacity: 0.7}}
 
       >
         <View style={styles.categoryBannerView}>
           <Text style={styles.categoryBannerText}>{categorySelected.replace("-", " ")}</Text>
         </View>
       </ImageBackground>
+      <NavigationButtons/>
       <FlatList
         style={styles.productList}
         data={productListByCategory}
@@ -58,7 +61,7 @@ const styles = StyleSheet.create({
     height: "100%",
     display: "flex",
     flexDirection: "column",
-    backgroundColor: "#e8e8e8",
+    backgroundColor: colorCollection.lightviolet,
   },
   productList: {
     marginHorizontal: 10,
@@ -66,7 +69,7 @@ const styles = StyleSheet.create({
   },
   categoryBanner: {
     width: "100%",
-    height: 175,
+    height: 100,
   },
   categoryBannerView: {
     position: "absolute",

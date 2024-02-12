@@ -1,6 +1,8 @@
 import { StyleSheet, Text, Pressable, Image } from "react-native";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
+import colorCollection from "../utils/global/colors";
+import fonts from "../utils/global/fonts";
 
 const CategoryCard = ({ item, lastItem, onHandleMenuModal }) => {
   const navigation = useNavigation();
@@ -45,6 +47,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontWeight: "bold",
     textTransform: "capitalize",
-    color: "darkgrey",
+    color: colorCollection.darkviolet,
+    fontFamily: fonts.Josefin,
   },
 });

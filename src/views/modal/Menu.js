@@ -1,14 +1,9 @@
-import {
-  Modal,
-  StyleSheet,
-  Text,
-  View,
-  FlatList,
-} from "react-native";
+import { Modal, StyleSheet, Text, View, FlatList } from "react-native";
 import { Icon } from "react-native-elements";
 import React from "react";
 import CategoryCard from "../../components/CategoryCard";
 import SearchInput from "../../components/SearchInput";
+import colorCollection from "../../utils/global/colors";
 
 const Menu = ({
   modalMenuVisible,
@@ -17,7 +12,6 @@ const Menu = ({
   onSearchCategoryQuery,
   searchCategoryQuery,
 }) => {
-
   return (
     <Modal animationType="fade" visible={modalMenuVisible}>
       <View style={styles.container}>
@@ -28,7 +22,7 @@ const Menu = ({
         />
         {categories.length === 0 ? (
           <View style={styles.notFoundView}>
-            <Icon name="help" size={120} color="#515151" />
+            <Icon name="help" size={120} color={colorCollection.darkviolet} />
             <Text style={styles.notFoundText}>
               Please, search for your favourite product
             </Text>
@@ -41,7 +35,13 @@ const Menu = ({
             numColumns={2}
             renderItem={({ item, index }) => {
               const lastItem = index === categories.length - 1;
-              return <CategoryCard item={item} lastItem={lastItem} onHandleMenuModal={onHandleMenuModal}/>;
+              return (
+                <CategoryCard
+                  item={item}
+                  lastItem={lastItem}
+                  onHandleMenuModal={onHandleMenuModal}
+                />
+              );
             }}
             keyExtractor={(item) => item}
           />
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     height: "100%",
     display: "flex",
     flexDirection: "column",
-    backgroundColor: "#e8e8e8",
+    backgroundColor: colorCollection.lightviolet,
   },
   categoryList: {
     marginHorizontal: 10,
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
   notFoundText: {
     fontSize: 20,
     fontWeight: "bold",
-    color: "#515151",
+    color: colorCollection.darkviolet,
     textAlign: "center",
   },
 });

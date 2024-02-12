@@ -9,6 +9,8 @@ import {
 import { AirbnbRating } from "react-native-ratings";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
+import fonts from "../utils/global/fonts";
+import colorCollection from "../utils/global/colors";
 
 const ProductCard = ({ item, onHandleSearchModal }) => {
   const navigation = useNavigation();
@@ -34,7 +36,7 @@ const ProductCard = ({ item, onHandleSearchModal }) => {
             showRating={false}
             isDisabled
             size={12}
-            selectedColor="red"
+            selectedColor={colorCollection.violet}
           />
         </View>
         <View style={styles.productPrice}>
@@ -81,7 +83,8 @@ const styles = StyleSheet.create({
     fontSize: 17,
     fontWeight: "bold",
     textTransform: "capitalize",
-    color: "darkgrey",
+    color: colorCollection.darkviolet,
+    fontFamily: fonts.Josefin,
   },
   productRating: {
     display: "flex",
@@ -92,7 +95,8 @@ const styles = StyleSheet.create({
   productRatingText: {
     fontSize: 13,
     fontWeight: "bold",
-    color: "#515151",
+    color: colorCollection.textdark,
+    fontFamily: fonts.Josefin,
   },
   productPrice: {
     display: "flex",
@@ -105,10 +109,12 @@ const styles = StyleSheet.create({
   productPriceOriginal: {
     fontSize: 25,
     fontWeight: "bold",
+    color: colorCollection.textdark,
+    fontFamily: fonts.Josefin,
   },
   productPriceDiscount: {
     fontSize: 14,
     fontWeight: "bold",
-    color: "grey",
+    color: colorCollection.violet,
   },
 });

@@ -1,26 +1,25 @@
-import {
-    StyleSheet,
-    TextInput,
-    View,
-    Pressable,
-  } from "react-native";
-  import { Icon } from "react-native-elements";
-  import React from "react";
+import { StyleSheet, TextInput, View, Pressable } from "react-native";
+import { Icon } from "react-native-elements";
+import colorCollection from "../utils/global/colors";
+import fonts from "../utils/global/fonts";
 
 const SearchInput = ({ onHandleViewScreen, query, onSearchQuery }) => {
   return (
     <View style={styles.searchBar}>
       <Pressable
         style={styles.searchButton}
-        onPress={() => onHandleViewScreen(false)}
+        onPress={() => {
+          onHandleViewScreen(false);
+        }}
       >
-        <Icon name="arrow-back" size={25} color="white" />
+        <Icon name="close" size={25} color={colorCollection.textlight} />
       </Pressable>
       <TextInput
         style={styles.searchInput}
         placeholder="Search..."
         value={query}
         onChangeText={onSearchQuery}
+        clear
       />
     </View>
   );
@@ -30,14 +29,13 @@ export default SearchInput;
 
 const styles = StyleSheet.create({
   searchBar: {
-    height: 110,
-    backgroundColor: "red",
+    backgroundColor: colorCollection.darkviolet,
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    paddingLeft: 25,
-    paddingRight: 25,
+    paddingHorizontal: 25,
+    paddingVertical: 30,
   },
   searchButton: {
     width: 50,
@@ -47,14 +45,15 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#696969",
+    backgroundColor: colorCollection.textdark,
   },
   searchInput: {
     width: "83%",
-    backgroundColor: "white",
+    backgroundColor: colorCollection.textlight,
     padding: 10,
     paddingLeft: 20,
     paddingRight: 20,
     borderRadius: 50,
+    fontFamily: fonts.Josefin,
   },
 });
