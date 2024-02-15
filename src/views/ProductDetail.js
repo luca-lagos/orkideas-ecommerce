@@ -113,13 +113,14 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems: "center",
+    alignItems: "flex-start",
   },
   title: {
     fontSize: 18,
     fontWeight: "bold",
     textTransform: "capitalize",
     fontFamily: fonts.Josefin,
+    width: "80%"
   },
   pricePanel: {
     display: "flex",
@@ -143,8 +144,8 @@ const styles = StyleSheet.create({
     fontFamily: fonts.Josefin,
     color: colorCollection.violet,
     marginTop: -7,
-    textAlign: "right",
-    marginRight: 7,
+    textAlign: "left",
+    marginLeft: 7,
   },
   countContainer: {
     display: "flex",

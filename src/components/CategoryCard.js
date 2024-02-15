@@ -28,9 +28,9 @@ export default CategoryCard;
 const styles = StyleSheet.create({
   categoryCard: {
     flex: 1,
-    height: 200,
     backgroundColor: "white",
     padding: 12,
+    paddingBottom: 20,
     margin: 6,
     borderRadius: 10,
     elevation: 5,
