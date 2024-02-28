@@ -7,16 +7,17 @@ import {
 } from "react-native";
 import { Icon } from "react-native-elements";
 import React from "react";
-import ProductCard from "../components/ProductCard";
+import ProductCard from "../../components/ProductCard";
 import { useState, useEffect } from "react";
 import { useRoute } from "@react-navigation/native";
-import NavigationButtons from "../components/NavigationButtons";
-import colorCollection from "../utils/global/colors";
+import NavigationButtons from "../../components/NavigationButtons";
+import colorCollection from "../../utils/global/colors";
 
 const ProductByCategory = () => {
   const route = useRoute();
   const categorySelected = route.params.category;
   const products = route.params.products;
+  const onSlider = route.params.onSlider;
   const [productListByCategory, setProductListByCategory] = useState([]);
 
   useEffect(() => {
@@ -33,20 +34,27 @@ const ProductByCategory = () => {
       <ImageBackground
         style={styles.categoryBanner}
         src="https://www.1800flowers.com/blog/wp-content/uploads/2021/05/Birthday-Flowers-Colors.jpg"
-        imageStyle={{backgroundColor: colorCollection.textdark, opacity: 0.7}}
-
+        imageStyle={{ backgroundColor: colorCollection.textdark, opacity: 0.7 }}
       >
         <View style={styles.categoryBannerView}>
-          <Text style={styles.categoryBannerText}>{categorySelected.replace("-", " ")}</Text>
+          <Text style={styles.categoryBannerText}>
+            {categorySelected.replace("-", " ")}
+          </Text>
         </View>
       </ImageBackground>
-      <NavigationButtons/>
+      <NavigationButtons />
       <FlatList
         style={styles.productList}
         data={productListByCategory}
         showsVerticalScrollIndicator={false}
         renderItem={({ item }) => {
-          return <ProductCard item={item} onHandleSearchModal={null}/>;
+          return (
+            <ProductCard
+              item={item}
+              onHandleSearchModal={null}
+              onSlider={onSlider}
+            />
+          );
         }}
         keyExtractor={(item) => item.id}
       />
@@ -85,5 +93,5 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textTransform: "uppercase",
     color: "white",
-  }
+  },
 });

@@ -1,22 +1,25 @@
-import {
-  Image,
-  StyleSheet,
-  Text,
-  View,
-  Pressable,
-  FlatList,
-} from "react-native";
+import { Image, StyleSheet, Text, View, Pressable } from "react-native";
 import { AirbnbRating } from "react-native-ratings";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import fonts from "../utils/global/fonts";
 import colorCollection from "../utils/global/colors";
 
-const ProductCard = ({ item, onHandleSearchModal }) => {
+const ProductCard = ({ item, onHandleSearchModal, onSlider, isFirstItem, isLastItem }) => {
   const navigation = useNavigation();
   return (
     <Pressable
-      style={styles.productCard}
+      style={[
+        styles.productCard,
+        {
+          flexDirection: onSlider ? "column" : "row",
+          justifyContent: onSlider ? "center" : "space-between",
+          width: onSlider ? 225 : "auto",
+          height: onSlider ? 375 : "auto",
+          marginLeft: isFirstItem ? 18 : 10,
+          marginRight: isLastItem ? 18 : 10
+        },
+      ]}
       onPress={() => {
         navigation.navigate("ProductDetail", { productId: item.id });
         if (onHandleSearchModal !== null) {
@@ -24,9 +27,28 @@ const ProductCard = ({ item, onHandleSearchModal }) => {
         }
       }}
     >
-      <Image style={styles.productImage} src={item.images[0]} />
-      <View style={styles.productInfo}>
-        <Text style={styles.productTitle}>{item.title}</Text>
+      <Image
+        style={[
+          styles.productImage,
+          {
+            width: onSlider ? "100%" : "35%",
+            height: onSlider ? "50%" : "100%",
+          },
+        ]}
+        src={item.images[0]}
+      />
+      <View
+        style={[
+          styles.productInfo,
+          {
+            width: onSlider ? "100%" : "65%",
+            alignItems: onSlider ? "center" : "flex-start",
+          },
+        ]}
+      >
+        <Text style={[styles.productTitle, { width: onSlider ? "auto" : 200 }]}>
+          {item.title}
+        </Text>
         <View style={styles.productRating}>
           <Text style={styles.productRatingText}>{item.rating}</Text>
           <AirbnbRating
@@ -56,30 +78,23 @@ const styles = StyleSheet.create({
   productCard: {
     flex: 1,
     backgroundColor: "white",
-    padding: 12,
     margin: 6,
+    padding: 12,
     borderRadius: 10,
     elevation: 5,
     display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
     alignItems: "center",
     gap: 25,
   },
   productImage: {
-    width: "35%",
-    height: "100%",
     borderRadius: 10,
   },
   productInfo: {
-    width: "65%",
     display: "flex",
     flexDirection: "column",
-    alignItems: "flex-start",
     gap: 5,
   },
   productTitle: {
-    width: 200,
     fontSize: 17,
     fontWeight: "bold",
     textTransform: "capitalize",

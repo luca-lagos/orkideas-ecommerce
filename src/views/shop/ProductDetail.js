@@ -1,13 +1,13 @@
-import { StyleSheet, Text, View, Pressable, Button, Image } from "react-native";
+import { StyleSheet, Text, View, Pressable } from "react-native";
 import React from "react";
 import { useRoute } from "@react-navigation/native";
 import { useState } from "react";
 import { useEffect } from "react";
 import { Icon } from "react-native-elements";
-import SliderImages from "../components/SliderImages";
-import NavigationButtons from "../components/NavigationButtons";
-import fonts from "../utils/global/fonts";
-import colorCollection from "../utils/global/colors";
+import Slider from "../../components/slider/Slider";
+import NavigationButtons from "../../components/NavigationButtons";
+import fonts from "../../utils/global/fonts";
+import colorCollection from "../../utils/global/colors";
 
 const ProductDetail = () => {
   const route = useRoute();
@@ -42,7 +42,7 @@ const ProductDetail = () => {
             />
           </Pressable>
         </View>
-        <SliderImages images={productById.images} />
+        <Slider images={productById.images}/>
         <View style={styles.pricePanel}>
           <View style={styles.priceContainer}>
             <Text style={styles.price}>${productById.price}</Text>
