@@ -22,32 +22,13 @@ const Home = () => {
   const [mostPopularProducts, setMostPopularProducts] = useState([]);
   const [mostSearchedProducts, setMostSearchedProducts] = useState([]);
   const [mostNewedProducts, setMostNewedProducts] = useState([]);
-  console.log(onSlider);
 
   useEffect(() => {
     if (products) {
       const mostPopularList = products.sort((a, b) => b.rating - a.rating);
       setMostPopularProducts(mostPopularList.slice(0, 10));
-      console.log(mostPopularProducts);
     }
   }, [products]);
-
-  /**<View style={styles.sliderProductList}>
-        <ImageBackground
-          style={styles.sliderProductBanner}
-          src="https://www.1800flowers.com/blog/wp-content/uploads/2021/05/Birthday-Flowers-Colors.jpg"
-          imageStyle={{
-            backgroundColor: colorCollection.textdark,
-            opacity: 0.7,
-            borderRadius: 10,
-          }}
-        >
-          <View style={styles.sliderProductBannerView}>
-            <Text style={styles.sliderProductBannerText}>most popular</Text>
-          </View>
-        </ImageBackground>
-        <Slider products={mostPopularProducts} />
-      </View> */
 
   return (
     <ScrollView style={styles.container}>

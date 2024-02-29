@@ -1,8 +1,8 @@
 import { Modal, StyleSheet, Text, View, FlatList } from "react-native";
 import { Icon } from "react-native-elements";
 import React from "react";
-import ProductCard from "../../components/ProductCard";
-import SearchInput from "../../components/SearchInput";
+import ProductCard from "../../components/shop/ProductCard";
+import SearchInput from "../../components/navigation/SearchInput";
 import colorCollection from "../../utils/global/colors";
 
 const Search = ({ modalSearchVisible, onHandleSearchModal, products, onSearchProductQuery, searchProductQuery }) => {

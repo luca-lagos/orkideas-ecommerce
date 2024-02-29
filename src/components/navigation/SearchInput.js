@@ -1,7 +1,7 @@
 import { StyleSheet, TextInput, View, Pressable } from "react-native";
 import { Icon } from "react-native-elements";
-import colorCollection from "../utils/global/colors";
-import fonts from "../utils/global/fonts";
+import colorCollection from "../../utils/global/colors";
+import fonts from "../../utils/global/fonts";
 
 const SearchInput = ({ onHandleViewScreen, query, onSearchQuery }) => {
   return (

@@ -1,8 +1,8 @@
 import { Modal, StyleSheet, Text, View, FlatList } from "react-native";
 import { Icon } from "react-native-elements";
 import React from "react";
-import CategoryCard from "../../components/CategoryCard";
-import SearchInput from "../../components/SearchInput";
+import CategoryCard from "../../components/shop/CategoryCard";
+import SearchInput from "../../components/navigation/SearchInput";
 import colorCollection from "../../utils/global/colors";
 
 const Menu = ({

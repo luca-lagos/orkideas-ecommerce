@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, Pressable } from "react-native";
 import { Icon } from "react-native-elements";
 import React from "react";
-import colorCollection from "../utils/global/colors";
+import colorCollection from "../../utils/global/colors";
 import { useNavigation } from "@react-navigation/native";
 
 const NavigationButtons = () => {

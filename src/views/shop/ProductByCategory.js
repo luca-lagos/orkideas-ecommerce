@@ -7,10 +7,10 @@ import {
 } from "react-native";
 import { Icon } from "react-native-elements";
 import React from "react";
-import ProductCard from "../../components/ProductCard";
+import ProductCard from "../../components/shop/ProductCard";
 import { useState, useEffect } from "react";
 import { useRoute } from "@react-navigation/native";
-import NavigationButtons from "../../components/NavigationButtons";
+import NavigationButtons from "../../components/navigation/NavigationButtons";
 import colorCollection from "../../utils/global/colors";
 
 const ProductByCategory = () => {

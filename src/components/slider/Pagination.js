@@ -4,7 +4,7 @@ import React from "react";
 
 const { width } = Dimensions.get("screen");
 
-const Pagination = ({ data, scrollX, index }) => {
+const Pagination = ({ data, scrollX }) => {
   return (
     <View style={styles.container}>
       {data.map((item, idx) => {

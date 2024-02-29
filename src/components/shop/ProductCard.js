@@ -2,8 +2,8 @@ import { Image, StyleSheet, Text, View, Pressable } from "react-native";
 import { AirbnbRating } from "react-native-ratings";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
-import fonts from "../utils/global/fonts";
-import colorCollection from "../utils/global/colors";
+import fonts from "../../utils/global/fonts";
+import colorCollection from "../../utils/global/colors";
 
 const ProductCard = ({ item, onHandleSearchModal, onSlider, isFirstItem, isLastItem }) => {
   const navigation = useNavigation();
@@ -15,9 +15,10 @@ const ProductCard = ({ item, onHandleSearchModal, onSlider, isFirstItem, isLastI
           flexDirection: onSlider ? "column" : "row",
           justifyContent: onSlider ? "center" : "space-between",
           width: onSlider ? 225 : "auto",
-          height: onSlider ? 375 : "auto",
+          height: onSlider ? 350 : "auto",
           marginLeft: isFirstItem ? 18 : 10,
-          marginRight: isLastItem ? 18 : 10
+          marginRight: isLastItem ? 18 : 10,
+          gap: onSlider ? 10 : 25,
         },
       ]}
       onPress={() => {
@@ -32,7 +33,7 @@ const ProductCard = ({ item, onHandleSearchModal, onSlider, isFirstItem, isLastI
           styles.productImage,
           {
             width: onSlider ? "100%" : "35%",
-            height: onSlider ? "50%" : "100%",
+            height: onSlider ? "66%" : "100%",
           },
         ]}
         src={item.images[0]}
@@ -46,7 +47,7 @@ const ProductCard = ({ item, onHandleSearchModal, onSlider, isFirstItem, isLastI
           },
         ]}
       >
-        <Text style={[styles.productTitle, { width: onSlider ? "auto" : 200 }]}>
+        <Text style={[styles.productTitle, { width: onSlider ? "auto" : 200}]} numberOfLines={1}>
           {item.title}
         </Text>
         <View style={styles.productRating}>
@@ -84,7 +85,6 @@ const styles = StyleSheet.create({
     elevation: 5,
     display: "flex",
     alignItems: "center",
-    gap: 25,
   },
   productImage: {
     borderRadius: 10,

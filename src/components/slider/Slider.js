@@ -5,26 +5,22 @@ import SliderCard from "./SliderCard";
 import Pagination from "./Pagination";
 
 const Slider = ({ images, categoryLink, products }) => {
-  const [sliderList, setSliderList] = useState([]);
   const [isImage, setIsImage] = useState(false);
   const [isBannerImage, setIsBannerImage] = useState(false);
   const [isProduct, setIsProduct] = useState(false);
   const scrollX = useRef(new Animated.Value(0)).current;
-  const [index, setIndex] = useState(0);
+  const [idx, setIdx] = useState(0);
 
   useEffect(() => {
-    if (images !== undefined && categoryLink === false) {
-      setSliderList(images);
+    if (categoryLink === false) {
       setIsImage(true);
       setIsBannerImage(false);
       setIsProduct(false);
-    } else if (images !== undefined && categoryLink === true) {
-      setSliderList(images);
+    } else if (categoryLink === true) {
       setIsImage(false);
       setIsBannerImage(true);
       setIsProduct(false);
     } else {
-      setSliderList(products);
       setIsImage(false);
       setIsBannerImage(false);
       setIsProduct(true);
@@ -49,31 +45,51 @@ const Slider = ({ images, categoryLink, products }) => {
   };
 
   const HandleOnViewableItemsChanged = useRef(({ viewableItems }) => {
-    setIndex(viewableItems[0].index);
+    setIdx(viewableItems[0]);
   }).current;
 
   const viewabilityConfig = useRef({ itemVisiblePercentThreshold: 50 }).current;
 
   return (
-    <View style={styles.container}>
+    <View
+      style={[
+        styles.container,
+        {
+          overflow: isImage ? "hidden" : "auto",
+          borderRadius: isImage ? 10 : 0,
+          zIndex: 1,
+        },
+      ]}
+    >
       <StatusBar hidden />
       <FlatList
-        style={styles.flatList}
-        data={sliderList}
+        data={isProduct ? products : images}
         horizontal
         pagingEnabled={isProduct ? false : true}
-        showsHorizontalScrollIndicator={
-          isProduct || isBannerImage ? false : true
-        }
+        showsHorizontalScrollIndicator={false}
         onScroll={isBannerImage || isImage ? HandleOnScroll : null}
         onViewableItemsChanged={HandleOnViewableItemsChanged}
         viewabilityConfig={viewabilityConfig}
-        renderItem={({ item, idx }) => {
+        renderItem={({ item }) => {
           return (
             <SliderCard
-              isFirstItem={sliderList.at(0) === item ? true : false}
+              isFirstItem={
+                isProduct
+                  ? products.at(0) === item
+                    ? true
+                    : false
+                  : images.at(0) === item
+                  ? true
+                  : false
+              }
               isLastItem={
-                sliderList.at(sliderList.length - 1) === item ? true : false
+                isProduct
+                  ? products.at(products.length - 1) === item
+                    ? true
+                    : false
+                  : images.at(images.length - 1) === item
+                  ? true
+                  : false
               }
               item={item}
               isImage={isImage}
@@ -84,8 +100,12 @@ const Slider = ({ images, categoryLink, products }) => {
         }}
         _keyExtractor={(item) => item}
       />
-      {(isImage || isBannerImage) && (
-        <Pagination data={sliderList} scrollX={scrollX} index={index} />
+      {(isBannerImage || isImage) && (
+        <Pagination
+          data={isProduct ? products : images}
+          scrollX={scrollX}
+          index={idx}
+        />
       )}
     </View>
   );
@@ -99,8 +119,5 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-  },
-  flatList: {
-    elevation: 10,
   },
 });
