@@ -5,13 +5,24 @@ import React from "react";
 import fonts from "../../utils/global/fonts";
 import { useDispatch } from "react-redux";
 import { addCartItem } from "../../features/cart/cartSlice";
+import Notification from "../notifications/Notification";
 
 const AddCartItemButton = ({ initialValue, product }) => {
   const [productCount, setProductCount] = useState(initialValue);
+  const [notification, setNotification] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(false);
+  const [title, setTitle] = useState(null);
+  const [navigate, setNavigate] = useState(null);
   const dispatch = useDispatch();
   const HandleAddCartItem = (quantity) => {
     dispatch(addCartItem({ ...product, quantity }));
+    setSuccess(true);
+    setError(false);
+    setTitle("Product added successfully");
+    setNavigate("Cart");
     setProductCount(1);
+    setNotification(true);
   };
   return (
     <>
@@ -40,11 +51,11 @@ const AddCartItemButton = ({ initialValue, product }) => {
           </View>
           <Pressable
             style={
-              productCount == 10
+              productCount == product.stock
                 ? styles.buttonCountDisabled
                 : styles.buttonCount
             }
-            disabled={productCount === 10 ? true : false}
+            disabled={productCount === product.stock ? true : false}
             onPress={() => {
               setProductCount(productCount + 1);
             }}
@@ -60,6 +71,13 @@ const AddCartItemButton = ({ initialValue, product }) => {
       >
         <Text style={styles.addToCartText}>ADD TO CART</Text>
       </Pressable>
+      <Notification
+        modalVisible={notification}
+        title={title}
+        navigate={navigate}
+        onSuccess={success}
+        onError={error}
+      />
     </>
   );
 };

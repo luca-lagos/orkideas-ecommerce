@@ -30,7 +30,6 @@ export const cartSlice = createSlice({
         (acc, item) => (acc = acc + item.price * item.quantity),
         0
       );
-      console.log(state);
     },
     deleteCartItem: (state, actions) => {
       state.items.filter((item) => item.id !== actions.payload);

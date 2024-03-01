@@ -9,9 +9,7 @@ const Stack = createNativeStackNavigator();
 
 const ShopStack = () => {
   return (
-    <>
-      <Stack.Navigator
-        initialRouteName="Home"
+      <Stack.Group
         screenOptions={{
           headerShown: false,
         }}
@@ -35,8 +33,7 @@ const ShopStack = () => {
           component={ProductDetail}
           initialParams={{ products: products }}
         />
-      </Stack.Navigator>
-    </>
+      </Stack.Group>
   );
 };
 

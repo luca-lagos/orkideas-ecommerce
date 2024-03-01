@@ -6,7 +6,8 @@ const colorCollection = {
   textlight: "#e2daea",
   textdark: "#222222",
   disabled: "#979797",
-  red: "#e2504c"
+  red: "#e2504c",
+  green: "#2D965E",
 };
 
 export default colorCollection;

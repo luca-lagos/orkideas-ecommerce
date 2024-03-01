@@ -3,8 +3,10 @@ import { Icon } from "react-native-elements";
 import React from "react";
 import colorCollection from "../utils/global/colors";
 import fonts from "../utils/global/fonts";
+import { useNavigation } from "@react-navigation/native";
 
 const Header = ({ onHandleMenuModal, onHandleSearchModal }) => {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -30,7 +32,7 @@ const Header = ({ onHandleMenuModal, onHandleSearchModal }) => {
         <Pressable
           style={styles.button}
           onPress={() => {
-            console.log("OPEN CART");
+            navigation.navigate("User");
           }}
           marginRight={-7}
         >
@@ -43,7 +45,7 @@ const Header = ({ onHandleMenuModal, onHandleSearchModal }) => {
         <Pressable
           style={styles.button}
           onPress={() => {
-            console.log("OPEN CART");
+            navigation.navigate("Cart");
           }}
         >
           <Icon
@@ -64,7 +66,7 @@ const styles = StyleSheet.create({
     backgroundColor: colorCollection.darkviolet,
     display: "flex",
     flexDirection: "column",
-    alignItems: "center", 
+    alignItems: "center",
   },
   header: {
     display: "flex",
@@ -73,7 +75,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     marginTop: 35,
     paddingVertical: 30,
-    paddingHorizontal: 10
+    paddingHorizontal: 10,
   },
   button: {
     width: "15%",
@@ -93,5 +95,5 @@ const styles = StyleSheet.create({
   },
   searchText: {
     fontFamily: fonts.Josefin,
-  }
+  },
 });

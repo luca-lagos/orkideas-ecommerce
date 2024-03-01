@@ -27,7 +27,8 @@ const ProductDetail = () => {
   }, [productById]);
 
   return (
-    <View style={styles.container}>
+    <>
+      <View style={styles.container}>
       <NavigationButtons />
       <View style={styles.productContainer}>
         <View style={styles.titleContainer}>
@@ -46,6 +47,7 @@ const ProductDetail = () => {
         <AddCartItemButton initialValue={1} product={productById} />
       </View>
     </View>
+    </>
   );
 };
 

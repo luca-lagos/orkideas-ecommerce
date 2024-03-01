@@ -36,7 +36,7 @@ const ProductCard = ({ item, onHandleSearchModal, onSlider, isFirstItem, isLastI
             height: onSlider ? "66%" : "100%",
           },
         ]}
-        src={item.images[0]}
+        src={item.thumbnail}
       />
       <View
         style={[
