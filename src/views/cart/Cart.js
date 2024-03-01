@@ -44,11 +44,12 @@ const styles = StyleSheet.create({
   },
   cartItemList: {
     marginHorizontal: 10,
-    marginVertical: 10,
+    marginVertical: 15,
   },
   confirmContainer: {
     marginHorizontal: 20,
-    marginVertical: 20,
+    marginBottom: 15,
+    marginTop: -15
   },
   totalPrice: {
     display: "flex",

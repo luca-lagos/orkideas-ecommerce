@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
   },
   bannerImage: {
-    height: 225,
+    height: 190,
     minWidth: 411.5,
   },
 });

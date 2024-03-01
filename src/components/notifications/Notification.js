@@ -15,50 +15,50 @@ const Notification = ({
   const navigation = useNavigation();
 
   return (
-    <Modal
-      animationType="slide"
-      visible={modalVisible}
-      style={styles.container}
-    >
-      <Pressable
-        style={styles.closeModalButton}
-        onPress={() => {
-          navigation.goBack();
-        }}
-      >
-        <Icon name="close" color={colorCollection.textlight} size={35} />
-      </Pressable>
-      <View style={styles.modalMessageContainer}>
-        <Icon
-          name={onSuccess ? "check-circle" : "error"}
-          color={onSuccess ? colorCollection.green : colorCollection.red}
-          size={35}
-        />
-        <Text style={styles.modalMessageTitle}>{title}</Text>
-      </View>
-      <Pressable
-        style={[
-          styles.navigateButton,
-          {
-            backgroundColor: onSuccess
-              ? colorCollection.green
-              : colorCollection.red,
-          },
-        ]}
-        onPress={() => {
-          if (onSuccess) {
-            navigation.navigate(navigate);
-          } else {
+    <Modal animationType="fade" visible={modalVisible}>
+      <View style={styles.container}>
+        <Pressable
+          style={styles.closeModalButton}
+          onPress={() => {
             navigation.goBack();
-          }
-        }}
-      >
-        {onSuccess ? (
-          <Text style={styles.navigateTitle}>go to {navigate}</Text>
-        ) : (
-          <Text style={styles.navigateTitle}>go back</Text>
-        )}
-      </Pressable>
+          }}
+        >
+          <Icon name="close" color={colorCollection.textlight} size={35} />
+        </Pressable>
+        <View style={styles.modalMessageContainer}>
+          <Icon
+            name={onSuccess ? "check-circle" : "error"}
+            color={onSuccess ? colorCollection.green : colorCollection.red}
+            backgroundColor={"white"}
+            borderRadius={100}
+            size={150}
+          />
+          <Text style={styles.modalMessageTitle}>{title}</Text>
+        </View>
+        <Pressable
+          style={[
+            styles.navigateButton,
+            {
+              backgroundColor: onSuccess
+                ? colorCollection.green
+                : colorCollection.red,
+            },
+          ]}
+          onPress={() => {
+            if (onSuccess) {
+              navigation.navigate(navigate);
+            } else {
+              navigation.goBack();
+            }
+          }}
+        >
+          {onSuccess ? (
+            <Text style={styles.navigateTitle}>go to {navigate}</Text>
+          ) : (
+            <Text style={styles.navigateTitle}>go back</Text>
+          )}
+        </Pressable>
+      </View>
     </Modal>
   );
 };
@@ -73,15 +73,40 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: colorCollection.lightviolet,
+    gap: 25,
   },
   closeModalButton: {
+    position: "absolute",
+    top: 20,
+    left: 20,
+    padding: 10,
+    backgroundColor: colorCollection.textdark,
+    borderRadius: 50,
   },
   modalMessageContainer: {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    gap: 15,
   },
-  modalMessageTitle: {},
-  navigateButton: {},
-  navigateTitle: {},
+  modalMessageTitle: {
+    fontSize: 22,
+    maxWidth: 200,
+    textAlign: "center",
+    fontWeight: "bold",
+    color: "white",
+  },
+  navigateButton: {
+    width: 150,
+    padding: 15,
+    borderRadius: 10,
+    elevation: 5,
+  },
+  navigateTitle: {
+    textAlign: "center",
+    textTransform: "uppercase",
+    fontSize: 17,
+    fontWeight: "bold",
+    color: "white",
+  },
 });
