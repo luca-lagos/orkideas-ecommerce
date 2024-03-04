@@ -1,8 +1,10 @@
 import { StyleSheet, SafeAreaView } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import NavBar from "./NavBar";
-import products from "../utils/data/products.json";
-import promotions from "../utils/data/promotions.json";
+/*import products from "../utils/data/products.json";
+import promotions from "../utils/data/promotions.json";*/
+import { useGetAllProductsQuery } from "../app/services/shop";
+import { useGetAllPromotionsQuery } from "../app/services/shop";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Home from "../views/shop/Home";
 import ProductByCategory from "../views/shop/ProductByCategory";
@@ -10,6 +12,8 @@ import ProductDetail from "../views/shop/ProductDetail";
 import Cart from "../views/cart/Cart";
 const MainNavigator = () => {
   const Stack = createNativeStackNavigator();
+  const { data: products } = useGetAllProductsQuery();
+  const { data: promotions } = useGetAllPromotionsQuery();
 
   return (
     <NavigationContainer>

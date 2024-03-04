@@ -2,10 +2,15 @@ import { useState } from "react";
 import Header from "../components/Header";
 import Menu from "../views/modal/Menu";
 import Search from "../views/modal/Search";
-import categories from "../utils/data/categories.json";
-import products from "../utils/data/products.json";
+/*import categories from "../utils/data/categories.json";
+  import products from "../utils/data/products.json";*/
+import { useGetAllProductsQuery } from "../app/services/shop";
+import { useGetAllCategoriesQuery } from "../app/services/shop";
 
 const NavBar = () => {
+  const { data: categories } = useGetAllCategoriesQuery();
+  const { data: products } = useGetAllProductsQuery();
+
   const [modalSearchVisible, setSearchModalVisible] = useState(false);
   const [modalMenuVisible, setMenuModalVisible] = useState(false);
   const [searchProductQuery, setSearchProductQuery] = useState("");
