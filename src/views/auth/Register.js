@@ -2,6 +2,7 @@ import {
   StyleSheet,
   Text,
   View,
+  ScrollView,
   ImageBackground,
   Pressable,
 } from "react-native";
@@ -19,6 +20,8 @@ import { setUser } from "../../features/auth/authSlice";
 import NavigationButtons from "../../components/navigation/NavigationButtons";
 import Notification from "../../components/notifications/Notification";
 import { usePostProfileMutation } from "../../app/services/profileService";
+import ImageSelector from "../../components/profile/ImageSelector";
+import LocationSelector from "../../components/profile/LocationSelector";
 
 const Register = () => {
   const navigation = useNavigation();
@@ -28,7 +31,7 @@ const Register = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [fullname, setFullname] = useState("");
   const [userImage, setUserImage] = useState("");
-  const [location, setLocation] = useState("");
+  const [location, setLocation] = useState({});
   const [errorEmail, setErrorEmail] = useState("");
   const [errorPassword, setErrorPassword] = useState("");
   const [errorConfirmPassword, setErrorConfirmPassword] = useState("");
@@ -42,6 +45,8 @@ const Register = () => {
   const [error, setError] = useState(false);
   const [title, setTitle] = useState(null);
   const [navigate, setNavigate] = useState(null);
+
+  console.log(userImage, location);
 
   const onSubmit = async () => {
     try {
@@ -93,7 +98,7 @@ const Register = () => {
         case "confirmPassword":
           setErrorPassword(error.message);
           break;
-          case "fullname":
+        case "fullname":
           setErrorPassword(error.message);
           break;
         default:
@@ -106,89 +111,100 @@ const Register = () => {
     <>
       <View style={styles.container}>
         <NavigationButtons />
-        <View style={styles.form}>
-          <ImageBackground
-            style={styles.titleBanner}
-            src="https://www.1800flowers.com/blog/wp-content/uploads/2021/05/Birthday-Flowers-Colors.jpg"
-            imageStyle={{
-              backgroundColor: colorCollection.textdark,
-              opacity: 0.7,
-              borderRadius: 10,
-            }}
-          >
-            <View style={styles.titleContainer}>
-              <Text style={styles.titleText}>REGISTER</Text>
-            </View>
-          </ImageBackground>
-          <View style={styles.formGroup}>
-          <InputForm
-              label="Fullname"
-              value={fullname}
-              onChangeText={(t) => setFullname(t)}
-              isSecure={false}
-              error={errorFullname}
-            />
-            <InputForm
-              label="Email"
-              value={email}
-              onChangeText={(t) => setEmail(t)}
-              isSecure={false}
-              error={errorEmail}
-            />
-            <View style={styles.passwordInput}>
-              <InputForm
-                label="Password"
-                value={password}
-                onChangeText={(t) => setPassword(t)}
-                isSecure={passwordVisible}
-                error={errorPassword}
-              />
-              <Pressable
-                style={styles.passwordIcon}
-                onPress={() => setPasswordVisible(!passwordVisible)}
-              >
-                <Icon
-                  name={passwordVisible ? "visibility" : "visibility-off"}
-                  size={35}
-                  color={colorCollection.darkviolet}
-                />
-              </Pressable>
-            </View>
-            <View style={styles.passwordInput}>
-              <InputForm
-                label="Confirm password"
-                value={confirmPassword}
-                onChangeText={(t) => setConfirmPassword(t)}
-                isSecure={confirmPasswordVisible}
-                error={errorConfirmPassword}
-              />
-              <Pressable
-                style={styles.passwordIcon}
-                onPress={() =>
-                  setConfirmPasswordVisible(!confirmPasswordVisible)
-                }
-              >
-                <Icon
-                  name={
-                    confirmPasswordVisible ? "visibility" : "visibility-off"
-                  }
-                  size={35}
-                  color={colorCollection.darkviolet}
-                />
-              </Pressable>
-            </View>
-          </View>
-          <View style={styles.buttonGroup}>
-            <ButtonForm title={"SIGN UP"} onPress={onSubmit} isGoogle={false} />
-            <Pressable
-              onPress={() => {
-                navigation.navigate("Login");
+        <ScrollView>
+          <View style={styles.form}>
+            <ImageBackground
+              style={styles.titleBanner}
+              src="https://www.1800flowers.com/blog/wp-content/uploads/2021/05/Birthday-Flowers-Colors.jpg"
+              imageStyle={{
+                backgroundColor: colorCollection.textdark,
+                opacity: 0.7,
+                borderRadius: 10,
               }}
             >
-              <Text style={styles.subLink}>You have an account? Sign in</Text>
-            </Pressable>
+              <View style={styles.titleContainer}>
+                <Text style={styles.titleText}>REGISTER</Text>
+              </View>
+            </ImageBackground>
+            <View style={styles.formGroup}>
+              <InputForm
+                label="Fullname"
+                value={fullname}
+                onChangeText={(t) => setFullname(t)}
+                isSecure={false}
+                error={errorFullname}
+              />
+              <InputForm
+                label="Email"
+                value={email}
+                onChangeText={(t) => setEmail(t)}
+                isSecure={false}
+                error={errorEmail}
+              />
+              <View style={styles.passwordInput}>
+                <InputForm
+                  label="Password"
+                  value={password}
+                  onChangeText={(t) => setPassword(t)}
+                  isSecure={passwordVisible}
+                  error={errorPassword}
+                />
+                <Pressable
+                  style={styles.passwordIcon}
+                  onPress={() => setPasswordVisible(!passwordVisible)}
+                >
+                  <Icon
+                    name={passwordVisible ? "visibility" : "visibility-off"}
+                    size={35}
+                    color={colorCollection.darkviolet}
+                  />
+                </Pressable>
+              </View>
+              <View style={styles.passwordInput}>
+                <InputForm
+                  label="Confirm password"
+                  value={confirmPassword}
+                  onChangeText={(t) => setConfirmPassword(t)}
+                  isSecure={confirmPasswordVisible}
+                  error={errorConfirmPassword}
+                />
+                <Pressable
+                  style={styles.passwordIcon}
+                  onPress={() =>
+                    setConfirmPasswordVisible(!confirmPasswordVisible)
+                  }
+                >
+                  <Icon
+                    name={
+                      confirmPasswordVisible ? "visibility" : "visibility-off"
+                    }
+                    size={35}
+                    color={colorCollection.darkviolet}
+                  />
+                </Pressable>
+              </View>
+              <ImageSelector image={userImage} passImage={setUserImage} />
+              <LocationSelector
+                location={location}
+                passLocation={setLocation}
+              />
+            </View>
+            <View style={styles.buttonGroup}>
+              <ButtonForm
+                title={"SIGN UP"}
+                onPress={onSubmit}
+                isGoogle={false}
+              />
+              <Pressable
+                onPress={() => {
+                  navigation.navigate("Login");
+                }}
+              >
+                <Text style={styles.subLink}>You have an account? Sign in</Text>
+              </Pressable>
+            </View>
           </View>
-        </View>
+        </ScrollView>
       </View>
       <Notification
         modalVisible={notification}

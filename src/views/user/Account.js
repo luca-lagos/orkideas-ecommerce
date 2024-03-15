@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 import { useGetProfileQuery } from "../../app/services/profileService";
 import { useNavigation } from "@react-navigation/native";
 import { Icon } from "react-native-elements";
-import ButtonProfile from "../../components/profile/ButtonProfile";
 import colorCollection from "../../utils/global/colors";
 
 const Account = () => {
@@ -29,7 +28,6 @@ const Account = () => {
             <strong>LOCATION: </strong>
             {profile.location}
           </Text>
-          <ButtonProfile />
         </View>
         <Pressable style={styles.editAccountButton}>
           <Icon name="draft-orders" size={35} color={colorCollection.violet} />
