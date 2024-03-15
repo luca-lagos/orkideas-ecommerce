@@ -10,7 +10,7 @@ export const registerSchema = object().shape({
   email: string()
     .required("El email es requerido")
     .email("No es un mail valido"),
-  /*fullname: string().required("El nombre completo es requerido"),*/
+  fullname: string().required("El nombre completo es requerido"),
 });
 
 export const loginSchema = object().shape({

@@ -1,14 +1,14 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-const ButtonProfile = () => {
+const LocationSelector = () => {
   return (
     <View>
-      <Text>ButtonProfile</Text>
+      <Text>LocationSelector</Text>
     </View>
   )
 }
 
-export default ButtonProfile
+export default LocationSelector
 
 const styles = StyleSheet.create({})

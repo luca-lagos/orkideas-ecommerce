@@ -18,6 +18,7 @@ import { useNavigation } from "@react-navigation/native";
 import { setUser } from "../../features/auth/authSlice";
 import NavigationButtons from "../../components/navigation/NavigationButtons";
 import Notification from "../../components/notifications/Notification";
+import { usePostProfileMutation } from "../../app/services/profileService";
 
 const Register = () => {
   const navigation = useNavigation();
@@ -25,10 +26,15 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [fullname, setFullname] = useState("");
+  const [userImage, setUserImage] = useState("");
+  const [location, setLocation] = useState("");
   const [errorEmail, setErrorEmail] = useState("");
   const [errorPassword, setErrorPassword] = useState("");
   const [errorConfirmPassword, setErrorConfirmPassword] = useState("");
+  const [errorFullname, setErrorFullname] = useState("");
   const [triggerRegister] = useRegisterMutation();
+  const [triggerProfile] = usePostProfileMutation();
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
   const [notification, setNotification] = useState(false);
@@ -40,27 +46,42 @@ const Register = () => {
   const onSubmit = async () => {
     try {
       registerSchema.validateSync({
+        fullname,
         email,
         password,
         confirmPassword,
       });
-      const { data } = await triggerRegister({ email, password });
-      dispatch(
-        setUser({
-          email: data.email,
-          idToken: data.idToken,
-          localId: data.localId,
-        })
-      );
-      setNotification(true);
-      setTitle("Account registered successfully");
-      setSuccess(true);
-      setError(false);
-      setNavigate("Login");
+      if (
+        (fullname !== "" || undefined) &&
+        (userImage !== "" || undefined) &&
+        (location !== "" || undefined)
+      ) {
+        const { data } = await triggerRegister({ email, password });
+        const newProfile = {
+          id: data.localId,
+          fullname: fullname,
+          userImage: "",
+          location: "",
+        };
+        triggerProfile({ newProfile });
+        dispatch(
+          setUser({
+            email: data.email,
+            idToken: data.idToken,
+            localId: data.localId,
+          })
+        );
+        setNotification(true);
+        setTitle("Account registered successfully");
+        setSuccess(true);
+        setError(false);
+        setNavigate("Login");
+      }
     } catch (error) {
       setErrorEmail("");
       setErrorPassword("");
       setErrorConfirmPassword("");
+      setErrorFullname("");
 
       switch (error.path) {
         case "email":
@@ -70,6 +91,9 @@ const Register = () => {
           setErrorPassword(error.message);
           break;
         case "confirmPassword":
+          setErrorPassword(error.message);
+          break;
+          case "fullname":
           setErrorPassword(error.message);
           break;
         default:
@@ -97,6 +121,13 @@ const Register = () => {
             </View>
           </ImageBackground>
           <View style={styles.formGroup}>
+          <InputForm
+              label="Fullname"
+              value={fullname}
+              onChangeText={(t) => setFullname(t)}
+              isSecure={false}
+              error={errorFullname}
+            />
             <InputForm
               label="Email"
               value={email}

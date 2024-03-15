@@ -10,10 +10,10 @@ export const profileApi = createApi({
   }),
   tagTypes: ["Orders", "Favs"],
   endpoints: (builder) => ({
-    putProfile: builder.mutation({
-      query: ({ localId, profile }) => ({
-        url: `profile/${localId}.json`,
-        method: "PUT",
+    postProfile: builder.mutation({
+      query: ({ profile }) => ({
+        url: `profile.json`,
+        method: "POST",
         body: profile,
       }),
     }),
@@ -81,7 +81,7 @@ export const {
   useGetImageQuery,
   usePutUserLocationMutation,
   useGetUserLocationQuery,*/
-  usePutProfileMutation,
+  usePostProfileMutation,
   useGetProfileQuery,
   useGetAllOrdersQuery,
   useGetAllFavsQuery,
