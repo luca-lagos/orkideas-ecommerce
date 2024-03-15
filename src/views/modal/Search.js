@@ -15,7 +15,7 @@ const Search = ({ modalSearchVisible, onHandleSearchModal, products, onSearchPro
           query={searchProductQuery}
           onSearchQuery={onSearchProductQuery}
         />
-        {products.length === 0 ? (
+        {products?.length === 0 ? (
           <View style={styles.notFoundView}>
             <Icon name="help" size={120} color={colorCollection.darkviolet} />
             <Text style={styles.notFoundText}>

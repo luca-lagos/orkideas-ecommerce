@@ -9,31 +9,41 @@ import {
 import React from "react";
 import Slider from "../../components/slider/Slider";
 import colorCollection from "../../utils/global/colors";
-import { useRoute } from "@react-navigation/native";
+import {
+  useGetAllProductsQuery,
+  useGetAllPromotionsQuery,
+} from "../../app/services/shopService";
 import fonts from "../../utils/global/fonts";
 import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 
 const Home = () => {
-  const route = useRoute();
-  const products = route.params.products;
-  const promotions = route.params.promotions;
-  const onSlider = route.params.onSlider;
+  const { data: productsRD } = useGetAllProductsQuery();
+  const { data: promotionsRD } = useGetAllPromotionsQuery();
   const [mostSelledProducts, setMostSelledProducts] = useState([]);
   const [mostPopularProducts, setMostPopularProducts] = useState([]);
   const [mostSearchedProducts, setMostSearchedProducts] = useState([]);
   const [mostNewedProducts, setMostNewedProducts] = useState([]);
 
+  const user = useSelector((state) => state.auth);
+  console.log(user.idToken);
+  console.log(user.email);
+  console.log(user.localId);
+
   useEffect(() => {
-    if (products) {
-      const mostPopularList = products.sort((a, b) => b.rating - a.rating);
+    if (productsRD) {
+      const productsRDCopy = [...productsRD];
+      const mostPopularList = productsRDCopy.sort(
+        (a, b) => b.rating - a.rating
+      );
       setMostPopularProducts(mostPopularList.slice(0, 10));
     }
-  }, [products]);
+  }, [productsRD]);
 
   return (
     <ScrollView style={styles.container}>
       <View>
-        <Slider images={promotions} categoryLink={true} />
+        <Slider images={promotionsRD} categoryLink={true} />
       </View>
       <View style={styles.sliderProductList}>
         <ImageBackground
@@ -68,7 +78,7 @@ const styles = StyleSheet.create({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: 20
+    marginBottom: 20,
   },
   sliderProductBanner: {
     width: 375,

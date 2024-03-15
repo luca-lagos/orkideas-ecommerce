@@ -4,7 +4,6 @@ import React from "react";
 import CategoryCard from "../../components/shop/CategoryCard";
 import SearchInput from "../../components/navigation/SearchInput";
 import colorCollection from "../../utils/global/colors";
-import { useMemo } from "react";
 
 const Menu = ({
   modalMenuVisible,
@@ -13,7 +12,6 @@ const Menu = ({
   onSearchCategoryQuery,
   searchCategoryQuery,
 }) => {
-
   return (
     <Modal animationType="fade" visible={modalMenuVisible}>
       <View style={styles.container}>
@@ -22,7 +20,7 @@ const Menu = ({
           query={searchCategoryQuery}
           onSearchQuery={onSearchCategoryQuery}
         />
-        {categories.length === 0 ? (
+        {categories?.length === 0 ? (
           <View style={styles.notFoundView}>
             <Icon name="help" size={120} color={colorCollection.darkviolet} />
             <Text style={styles.notFoundText}>

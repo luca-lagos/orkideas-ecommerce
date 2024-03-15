@@ -1,33 +1,40 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { base_url } from "../firebase/database";
 
 export const shopApi = createApi({
   reducerPath: "shopApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://orkideas-ecommerce-default-rtdb.firebaseio.com",
+    baseUrl: base_url,
   }),
+  tagTypes: ["Favs"],
   endpoints: (builder) => ({
     getAllProducts: builder.query({
-      query: () => "/products.json",
+      query: () => "products.json",
     }),
     getAllPromotions: builder.query({
-      query: () => "/promotions.json",
+      query: () => "promotions.json",
     }),
     getProductsByCategory: builder.query({
       query: (category) =>
-        `/products.json?orderBy="category"&equalTo="${category}`,
+        `products.json?orderBy="category"&equalTo="${category}`,
       transformResponse: (response) => {
         const data = Object.values(response);
         return data;
       },
     }),
     getAllCategories: builder.query({
-      query: () => "/categories.json",
+      query: () => "categories.json",
     }),
     getProductById: builder.query({
-      query: (id) => `/products/${id}.json`,
+      query: (id) => `products/${id}.json`,
     }),
-    getProductsByRating: builder.query({
-      query: () => `/products.json?orderBy="rating,desc"&limitToFirst="10"`,
+    addFav: builder.mutation({
+      query: ({ localId, product }) => ({
+        url: `favs/${localId}.json`,
+        method: "POST",
+        body: product,
+      }),
+      invalidatesTags: ["Favs"],
     }),
   }),
 });
@@ -38,5 +45,5 @@ export const {
   useGetAllCategoriesQuery,
   useGetProductsByCategoryQuery,
   useGetProductByIdQuery,
-  useGetProductsByRatingQuery,
+  useAddFavMutation,
 } = shopApi;

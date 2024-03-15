@@ -84,10 +84,10 @@ const Slider = ({ images, categoryLink, products }) => {
               }
               isLastItem={
                 isProduct
-                  ? products.at(products.length - 1) === item
+                  ? products.at(products?.length - 1) === item
                     ? true
                     : false
-                  : images.at(images.length - 1) === item
+                  : images.at(images?.length - 1) === item
                   ? true
                   : false
               }

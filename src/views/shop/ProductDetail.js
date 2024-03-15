@@ -1,4 +1,10 @@
-import { StyleSheet, Text, View, Pressable } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Pressable,
+  ActivityIndicator,
+} from "react-native";
 import React from "react";
 import { useRoute } from "@react-navigation/native";
 import { useState } from "react";
@@ -9,44 +15,48 @@ import NavigationButtons from "../../components/navigation/NavigationButtons";
 import fonts from "../../utils/global/fonts";
 import colorCollection from "../../utils/global/colors";
 import AddCartItemButton from "../../components/shop/AddCartItemButton";
+import { useDispatch } from "react-redux";
+import { useGetProductByIdQuery } from "../../app/services/shopService";
 
 const ProductDetail = () => {
   const route = useRoute();
-  const productId = route.params.productId;
-  const products = route.params.products;
-  const [productById, setProductById] = useState({});
+  const productId = route.params.productId - 1;
+  const { data: productByIdRD, isLoading } = useGetProductByIdQuery(productId);
   const [productFav, setProductFav] = useState(false);
 
   const onHandleFavProduct = () => {
     setProductFav(!productFav);
   };
 
-  useEffect(() => {
-    const results = products.find((item) => item.id === productId);
-    setProductById(results);
-  }, [productById]);
+  if (isLoading) {
+    return (
+      <View style={styles.loading}>
+        <ActivityIndicator size="large" color={colorCollection.violet} />
+      </View>
+    );
+  }
 
   return (
     <>
       <View style={styles.container}>
-      <NavigationButtons />
-      <View style={styles.productContainer}>
-        <View style={styles.titleContainer}>
-          <Text style={styles.title}>{productById.title}</Text>
-          <Pressable onPress={onHandleFavProduct}>
-            <Icon
-              name="favorite"
-              size={35}
-              color={
-                productFav ? colorCollection.red : colorCollection.textdark
-              }
-            />
-          </Pressable>
+        <NavigationButtons />
+        <View style={styles.productContainer}>
+          <View style={styles.titleContainer}>
+            <Text style={styles.title}>{productByIdRD.title}</Text>
+            <Pressable onPress={onHandleFavProduct}>
+              <Icon
+                name="favorite"
+                size={35}
+                color={
+                  productFav ? colorCollection.red : colorCollection.textdark
+                }
+              />
+            </Pressable>
+          </View>
+          <Slider images={productByIdRD.images} categoryLink={false} />
+          <AddCartItemButton initialValue={1} product={productByIdRD} />
         </View>
-        <Slider images={productById.images} categoryLink={false} />
-        <AddCartItemButton initialValue={1} product={productById} />
       </View>
-    </View>
     </>
   );
 };
@@ -57,6 +67,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colorCollection.lightviolet,
+  },
+  loading: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: "center",
+    alignItems: "center",
   },
   productContainer: {
     margin: 15,

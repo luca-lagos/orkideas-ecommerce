@@ -33,14 +33,14 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    paddingVertical: 8,
+    paddingVertical: 12,
     paddingHorizontal: 15,
     backgroundColor: colorCollection.textlight,
   },
   button: {
     width: 60,
     backgroundColor: colorCollection.darkviolet,
-    padding: 5,
+    padding: 10,
     borderRadius: 50,
   },
 });

@@ -2,21 +2,26 @@ import { useState } from "react";
 import Header from "../components/Header";
 import Menu from "../views/modal/Menu";
 import Search from "../views/modal/Search";
-/*import categories from "../utils/data/categories.json";
-  import products from "../utils/data/products.json";*/
-import { useGetAllProductsQuery } from "../app/services/shop";
-import { useGetAllCategoriesQuery } from "../app/services/shop";
+import categories from "../utils/data/categories.json";
+import products from "../utils/data/products.json";
+import { useGetAllProductsQuery } from "../app/services/shopService";
+import { useGetAllCategoriesQuery } from "../app/services/shopService";
+import { useEffect } from "react";
 
-const NavBar = () => {
-  const { data: categories } = useGetAllCategoriesQuery();
-  const { data: products } = useGetAllProductsQuery();
-
+const NavBar = ({ categories, products }) => {
   const [modalSearchVisible, setSearchModalVisible] = useState(false);
   const [modalMenuVisible, setMenuModalVisible] = useState(false);
   const [searchProductQuery, setSearchProductQuery] = useState("");
   const [searchCategoryQuery, setSearchCategoryQuery] = useState("");
   const [filteredProductList, setFilteredProductList] = useState([]);
-  const [filteredCategoryList, setFilteredCategoryList] = useState(categories);
+  const [filteredCategoryList, setFilteredCategoryList] = useState([]);
+
+  useEffect(() => {
+    if (categories) {
+      const categoriesCopy = [...categories];
+      setFilteredCategoryList(categoriesCopy);
+    }
+  }, [categories]);
 
   const onHandleSearchModal = (value) => {
     setSearchModalVisible(value);
