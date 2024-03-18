@@ -43,7 +43,7 @@ const ImageSelector = ({ image, passImage }) => {
   };
   return (
     <>
-      <Text style={styles.title}>Image selector</Text>
+      <Text style={styles.title}>Profile image</Text>
       <ImageBackground
         style={styles.container}
         source={

@@ -16,19 +16,20 @@ import {
 import fonts from "../../utils/global/fonts";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import { ActivityIndicator } from "react-native";
 
 const Home = () => {
-  const { data: productsRD } = useGetAllProductsQuery();
-  const { data: promotionsRD } = useGetAllPromotionsQuery();
+  const { data: productsRD, isLoading: isProductLoading } =
+    useGetAllProductsQuery();
+  const { data: promotionsRD, isLoading: isPromotionLoading } =
+    useGetAllPromotionsQuery();
+
   const [mostSelledProducts, setMostSelledProducts] = useState([]);
   const [mostPopularProducts, setMostPopularProducts] = useState([]);
   const [mostSearchedProducts, setMostSearchedProducts] = useState([]);
   const [mostNewedProducts, setMostNewedProducts] = useState([]);
 
   const user = useSelector((state) => state.auth);
-  console.log(user.idToken);
-  console.log(user.email);
-  console.log(user.localId);
 
   useEffect(() => {
     if (productsRD) {
@@ -39,6 +40,18 @@ const Home = () => {
       setMostPopularProducts(mostPopularList.slice(0, 10));
     }
   }, [productsRD]);
+
+  /*if (isProductLoading && isPromotionLoading) {
+    return (
+      <View style={styles.loading}>
+        <ActivityIndicator
+          size="large"
+          color={colorCollection.violet}
+          style={{ flex: 1 }}
+        />
+      </View>
+    );
+  }*/
 
   return (
     <ScrollView style={styles.container}>
@@ -99,5 +112,11 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textTransform: "uppercase",
     color: "white",
+  },
+  loading: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: "center",
+    alignItems: "center",
   },
 });

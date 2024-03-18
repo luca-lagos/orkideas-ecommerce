@@ -16,7 +16,6 @@ import { useNavigation } from "@react-navigation/native";
 const Cart = () => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
-  console.log(cart.items);
   const localId = useSelector((state) => state.auth.localId);
   const [triggerAddOrder] = usePostOrderMutation();
   const [notification, setNotification] = useState(false);

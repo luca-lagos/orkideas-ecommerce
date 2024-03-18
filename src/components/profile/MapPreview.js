@@ -21,7 +21,7 @@ export default MapPreview;
 const styles = StyleSheet.create({
   image: {
     width: "100%",
-    height: 220,
+    height: 260,
     borderRadius: 10,
   },
 });

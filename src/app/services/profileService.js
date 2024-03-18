@@ -1,5 +1,3 @@
-/*,*/
-
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { base_url } from "../firebase/database";
 
@@ -8,44 +6,34 @@ export const profileApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: base_url,
   }),
-  tagTypes: ["Orders", "Favs"],
+  tagTypes: ["Profiles", "Orders", "Favs"],
   endpoints: (builder) => ({
     postProfile: builder.mutation({
-      query: ({ profile }) => ({
-        url: `profile.json`,
-        method: "POST",
+      query: ({ localId, profile }) => ({
+        url: `profiles/${localId}.json`,
+        method: "PUT",
         body: profile,
       }),
+      invalidatesTags: ["Profiles"],
     }),
     getProfile: builder.query({
-      query: (localId) => `profile/${localId}.json`,
+      query: (localId) => `profiles/${localId}.json`,
     }),
-    /*putImage: builder.mutation({
-      query: ({ localId, image }) => ({
-        url: `profile/${localId}.json`,
-        method: "PUT",
-        body: image,
-      }),
+    getOrdersById: builder.query({
+      query: (localId) => `orders/${localId}.json`,
+      transformResponse: (response) => {
+        if (response === null) {
+          return false;
+        }
+        return true;
+      },
     }),
-    getImage: builder.query({
-      query: (localId) => `profile/${localId}.json`,
-    }),
-    putUserLocation: builder.mutation({
-      query: ({ localId, locationFormatted }) => ({
-        url: `profile/${localId}.json`,
-        method: "PUT",
-        body: locationFormatted,
-      }),
-    }),
-    getUserLocation: builder.query({
-      query: (localId) => `userLocation/${localId}.json`,
-    }),*/
     getAllOrders: builder.query({
       query: (localId) => `orders/${localId}.json`,
       transformResponse: (response) => {
         const data = Object.entries(response).map((item) => {
           return {
-            id: item.id,
+            id: item[0],
             ...item[1],
           };
         });
@@ -58,7 +46,7 @@ export const profileApi = createApi({
       transformResponse: (response) => {
         const data = Object.entries(response).map((item) => {
           return {
-            id: item.id,
+            id: item[0],
             ...item[1],
           };
         });
@@ -77,12 +65,9 @@ export const profileApi = createApi({
 });
 
 export const {
-  /*usePutImageMutation,
-  useGetImageQuery,
-  usePutUserLocationMutation,
-  useGetUserLocationQuery,*/
   usePostProfileMutation,
   useGetProfileQuery,
+  useGetOrdersByIdQuery,
   useGetAllOrdersQuery,
   useGetAllFavsQuery,
   useDeleteFavMutation,

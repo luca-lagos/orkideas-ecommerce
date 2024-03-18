@@ -5,10 +5,13 @@ import colorCollection from "../utils/global/colors";
 import fonts from "../utils/global/fonts";
 import { useNavigation } from "@react-navigation/native";
 import { useSelector } from "react-redux";
+import { useGetProfileQuery } from "../app/services/profileService";
 
 const Header = ({ onHandleMenuModal, onHandleSearchModal }) => {
   const navigation = useNavigation();
   const user = useSelector((state) => state.auth);
+  const cart = useSelector((state) => state.cart);
+  const { data: profile } = useGetProfileQuery(user.localId);
 
   return (
     <View style={styles.container}>
@@ -36,7 +39,10 @@ const Header = ({ onHandleMenuModal, onHandleSearchModal }) => {
           style={styles.button}
           onPress={() => {
             if (user.idToken) {
-              navigation.navigate("Account");
+              navigation.navigate("Account", {
+                profile: profile,
+                localId: user.localId,
+              });
             } else {
               navigation.navigate("Login");
             }
@@ -46,7 +52,7 @@ const Header = ({ onHandleMenuModal, onHandleSearchModal }) => {
           {user.idToken ? (
             <Image
               style={styles.userImage}
-              src="https://t4.ftcdn.net/jpg/02/29/75/83/360_F_229758328_7x8jwCwjtBMmC6rgFzLFhZoEpLobB6L8.jpg"
+              source={{ uri: profile?.userImage }}
             />
           ) : (
             <Icon
@@ -62,6 +68,9 @@ const Header = ({ onHandleMenuModal, onHandleSearchModal }) => {
             navigation.navigate("Cart");
           }}
         >
+          {cart.items.length > 0 && (
+            <Text style={styles.cartCounter}>{cart.items.length}</Text>
+          )}
           <Icon
             name="shopping-cart"
             color={colorCollection.textlight}
@@ -114,6 +123,20 @@ const styles = StyleSheet.create({
     width: 35,
     height: 35,
     borderRadius: 100,
-    marginLeft: 10
-  }
+    marginLeft: 10,
+    borderWidth: 2,
+    borderColor: colorCollection.textlight,
+  },
+  cartCounter: {
+    position: "absolute",
+    padding: 5,
+    fontSize: 10,
+    fontWeight: "bold",
+    backgroundColor: colorCollection.red,
+    color: "white",
+    borderRadius: 50,
+    zIndex: 1,
+    right: 8,
+    top: -8,
+  },
 });

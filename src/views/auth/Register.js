@@ -31,7 +31,10 @@ const Register = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [fullname, setFullname] = useState("");
   const [userImage, setUserImage] = useState("");
-  const [location, setLocation] = useState({});
+  const [location, setLocation] = useState({
+    address: "",
+    coords: { latitude: "", longitude: "" },
+  });
   const [errorEmail, setErrorEmail] = useState("");
   const [errorPassword, setErrorPassword] = useState("");
   const [errorConfirmPassword, setErrorConfirmPassword] = useState("");
@@ -46,8 +49,6 @@ const Register = () => {
   const [title, setTitle] = useState(null);
   const [navigate, setNavigate] = useState(null);
 
-  console.log(userImage, location);
-
   const onSubmit = async () => {
     try {
       registerSchema.validateSync({
@@ -56,19 +57,21 @@ const Register = () => {
         password,
         confirmPassword,
       });
-      if (
-        (fullname !== "" || undefined) &&
-        (userImage !== "" || undefined) &&
-        (location !== "" || undefined)
-      ) {
+      if (fullname !== "" && userImage !== "" && location.address !== "") {
         const { data } = await triggerRegister({ email, password });
-        const newProfile = {
-          id: data.localId,
+        const localId = await data.localId;
+        const user = {
           fullname: fullname,
-          userImage: "",
-          location: "",
+          userImage: userImage,
+          location: location,
         };
-        triggerProfile({ newProfile });
+        triggerProfile({ localId: localId, profile: user })
+          .then(() => {
+            console.log("PROFILE CREATFD");
+          })
+          .catch((err) => {
+            console.log(err);
+          });
         dispatch(
           setUser({
             email: data.email,
@@ -80,7 +83,7 @@ const Register = () => {
         setTitle("Account registered successfully");
         setSuccess(true);
         setError(false);
-        setNavigate("Login");
+        setNavigate("Home");
       }
     } catch (error) {
       setErrorEmail("");

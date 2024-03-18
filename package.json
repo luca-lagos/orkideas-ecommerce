@@ -30,6 +30,7 @@
     "react-native-ratings": "^8.1.0",
     "react-native-vector-icons": "^10.0.3",
     "react-redux": "^9.1.0",
+    "sweetalert2": "^11.10.6",
     "uninstall": "^0.0.0",
     "yup": "^1.4.0"
   },

@@ -31,7 +31,7 @@ const ProductDetail = () => {
   if (isLoading) {
     return (
       <View style={styles.loading}>
-        <ActivityIndicator size="large" color={colorCollection.violet} />
+        <ActivityIndicator size="large" color={colorCollection.violet} style={{flex: 1}}/>
       </View>
     );
   }
@@ -43,7 +43,7 @@ const ProductDetail = () => {
         <View style={styles.productContainer}>
           <View style={styles.titleContainer}>
             <Text style={styles.title}>{productByIdRD.title}</Text>
-            <Pressable onPress={onHandleFavProduct}>
+            <Pressable onPress={onHandleFavProduct} style={{display: "none"}}>
               <Icon
                 name="favorite"
                 size={35}
