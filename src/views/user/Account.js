@@ -18,67 +18,80 @@ import colorCollection from "../../utils/global/colors";
 import NavigationButtons from "../../components/navigation/NavigationButtons";
 import fonts from "../../utils/global/fonts";
 import { useEffect } from "react";
+import Logout from "../modal/Logout";
 
 const Account = () => {
   const route = useRoute();
   const profile = route.params.profile;
   const localId = route.params.localId;
   const navigation = useNavigation();
+  const [logoutModal, setLogoutModal] = useState(false);
   const { data: orderById } = useGetOrdersByIdQuery(localId);
 
   console.log(orderById);
 
   return (
-    <View style={styles.container}>
-      <NavigationButtons />
-      <View style={styles.account}>
-        <ImageBackground
-          style={styles.userImage}
-          source={{ uri: profile.userImage }}
-          resizeMode="cover"
-          imageStyle={{
-            borderColor: colorCollection.lightviolet,
-            borderTopLeftRadius: 10,
-            borderTopRightRadius: 10,
-            backgroundColor: colorCollection.textdark,
-            opacity: 0.8,
+    <>
+      <View style={styles.container}>
+        <NavigationButtons />
+        <View style={styles.account}>
+          <ImageBackground
+            style={styles.userImage}
+            source={{ uri: profile.userImage }}
+            resizeMode="cover"
+            imageStyle={{
+              borderColor: colorCollection.lightviolet,
+              borderTopLeftRadius: 10,
+              borderTopRightRadius: 10,
+              backgroundColor: colorCollection.textdark,
+              opacity: 0.8,
+            }}
+          >
+            <View style={styles.userImageContainer}>
+              <Text style={styles.userImageText}>MY PROFILE</Text>
+            </View>
+          </ImageBackground>
+          <View style={styles.textContainer}>
+            <Text style={styles.text}>FULLNAME: {profile.fullname}</Text>
+            <Text style={styles.text}>
+              ADDRESS LOCATION: {profile.location.address}
+            </Text>
+          </View>
+          <Pressable style={styles.editAccountButton}>
+            <Icon name="edit" size={25} color={colorCollection.lightviolet} />
+          </Pressable>
+        </View>
+        {orderById === true && (
+          <Pressable
+            style={styles.modalButton}
+            onPress={() => {
+              navigation.navigate("Orders");
+            }}
+          >
+            <Text style={styles.modalButtonText}>My orders</Text>
+            <Icon name="work" size={35} color={colorCollection.violet} />
+          </Pressable>
+        )}
+        <Pressable
+          style={[styles.modalButton, { display: "none" }]}
+          onPress={() => {
+            navigation.navigate("Favs");
           }}
         >
-          <View style={styles.userImageContainer}>
-            <Text style={styles.userImageText}>MY PROFILE</Text>
-          </View>
-        </ImageBackground>
-        <View style={styles.textContainer}>
-          <Text style={styles.text}>FULLNAME: {profile.fullname}</Text>
-          <Text style={styles.text}>
-            ADDRESS LOCATION: {profile.location.address}
-          </Text>
-        </View>
-        <Pressable style={styles.editAccountButton}>
-          <Icon name="edit" size={25} color={colorCollection.lightviolet} />
+          <Text style={styles.modalButtonText}>My favs</Text>
+          <Icon name="favorite" size={35} color={colorCollection.violet} />
+        </Pressable>
+        <Pressable
+          style={styles.logoutContainer}
+          onPress={() => {
+            setLogoutModal(true);
+          }}
+        >
+          <Text style={styles.logoutTitle}>LOGOUT</Text>
         </Pressable>
       </View>
-      {orderById === true && (
-        <Pressable
-          style={styles.modalButton}
-          onPress={() => {
-            navigation.navigate("Orders");
-          }}
-        >
-          <Text style={styles.modalButtonText}>My orders</Text>
-          <Icon name="work" size={35} color={colorCollection.violet} />
-        </Pressable>
-      )}
-      <Pressable
-        style={[styles.modalButton, { display: "none" }]}
-        onPress={() => {
-          navigation.navigate("Favs");
-        }}
-      >
-        <Text style={styles.modalButtonText}>My favs</Text>
-        <Icon name="favorite" size={35} color={colorCollection.violet} />
-      </Pressable>
-    </View>
+      <Logout modalVisible={logoutModal} passModalVisible={setLogoutModal} />
+    </>
   );
 };
 
@@ -163,5 +176,24 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textTransform: "uppercase",
     color: colorCollection.violet,
+  },
+  logoutContainer: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: colorCollection.red,
+    height: 60,
+    padding: 15,
+    marginVertical: 10,
+    marginHorizontal: 10,
+    borderRadius: 10,
+    elevation: 5,
+  },
+  logoutTitle: {
+    fontSize: 17,
+    fontWeight: "bold",
+    textTransform: "uppercase",
+    color: colorCollection.white,
   },
 });

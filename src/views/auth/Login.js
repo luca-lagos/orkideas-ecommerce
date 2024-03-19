@@ -17,6 +17,7 @@ import ButtonForm from "../../components/auth/ButtonForm";
 import { useNavigation } from "@react-navigation/native";
 import NavigationButtons from "../../components/navigation/NavigationButtons";
 import { setUser } from "../../features/auth/authSlice";
+import { insertSession, deleteSession } from "../../utils/db";
 
 const Login = () => {
   const navigation = useNavigation();
@@ -32,6 +33,8 @@ const Login = () => {
     try {
       loginSchema.validateSync({ email, password });
       const { data } = await triggerLogin({ email, password });
+      deleteSession();
+      insertSession(data);
       dispatch(
         setUser({
           email: data.email,

@@ -22,6 +22,7 @@ import Notification from "../../components/notifications/Notification";
 import { usePostProfileMutation } from "../../app/services/profileService";
 import ImageSelector from "../../components/profile/ImageSelector";
 import LocationSelector from "../../components/profile/LocationSelector";
+import { insertSession, deleteSession } from "../../utils/db";
 
 const Register = () => {
   const navigation = useNavigation();
@@ -72,6 +73,8 @@ const Register = () => {
           .catch((err) => {
             console.log(err);
           });
+        deleteSession();
+        insertSession(data);
         dispatch(
           setUser({
             email: data.email,

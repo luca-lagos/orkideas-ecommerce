@@ -16,11 +16,31 @@ import Account from "../views/user/Account";
 import Favs from "../views/user/Favs";
 import Login from "../views/auth/Login";
 import Register from "../views/auth/Register";
+import { fetchSession } from "../utils/db";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { setUser } from "../features/auth/authSlice";
 
 const MainNavigator = () => {
   const Stack = createNativeStackNavigator();
   const { data: productsRD } = useGetAllProductsQuery();
   const { data: categoriesRD } = useGetAllCategoriesQuery();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    (async () => {
+      const session = await fetchSession();
+      if (session.rows.length) {
+        const now = Math.floor(Date.now() / 1000);
+        const updateAt = session.rows._array[0].updateAt;
+        const sessionTime = now - updateAt;
+        if (sessionTime < 3600) {
+          const user = session.rows._array[0];
+          dispatch(setUser(user));
+        }
+      }
+    })();
+  }, []);
 
   return (
     <NavigationContainer>
