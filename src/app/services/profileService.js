@@ -16,11 +16,28 @@ export const profileApi = createApi({
       }),
       invalidatesTags: ["Profiles"],
     }),
+    postFav: builder.mutation({
+      query: ({ localId, product }) => ({
+        url: `favs/${localId}.json`,
+        method: "POST",
+        body: product,
+      }),
+      invalidatesTags: ["Favs"],
+    }),
     getProfile: builder.query({
       query: (localId) => `profiles/${localId}.json`,
     }),
     getOrdersById: builder.query({
       query: (localId) => `orders/${localId}.json`,
+      transformResponse: (response) => {
+        if (response === null) {
+          return false;
+        }
+        return true;
+      },
+    }),
+    getFavsById: builder.query({
+      query: (localId) => `favs/${localId}.json`,
       transformResponse: (response) => {
         if (response === null) {
           return false;
@@ -56,7 +73,7 @@ export const profileApi = createApi({
     }),
     deleteFav: builder.mutation({
       query: ({ localId, productId }) => ({
-        url: `favs/${localId}.json/${productId}`,
+        url: `favs/${localId}/${productId}.json`,
         method: "DELETE",
       }),
       invalidatesTags: ["Favs"],
@@ -66,8 +83,10 @@ export const profileApi = createApi({
 
 export const {
   usePostProfileMutation,
+  usePostFavMutation,
   useGetProfileQuery,
   useGetOrdersByIdQuery,
+  useGetFavsByIdQuery,
   useGetAllOrdersQuery,
   useGetAllFavsQuery,
   useDeleteFavMutation,

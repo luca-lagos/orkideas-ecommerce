@@ -11,6 +11,7 @@ const Notification = ({
   modalVisible,
   onSuccess,
   onError,
+  onInfo,
 }) => {
   const navigation = useNavigation();
 
@@ -27,7 +28,7 @@ const Notification = ({
         </Pressable>
         <View style={styles.modalMessageContainer}>
           <Icon
-            name={onSuccess ? "check-circle" : "error"}
+            name={onSuccess ? "check-circle" : onError ? "error" : "info"}
             color={onSuccess ? colorCollection.green : colorCollection.red}
             backgroundColor={"white"}
             borderRadius={100}
@@ -41,7 +42,10 @@ const Notification = ({
             {
               backgroundColor: onSuccess
                 ? colorCollection.green
-                : colorCollection.red,
+                : onError
+                ? colorCollection.red
+                : colorCollection.violet,
+              display: navigate != null ? "flex" : "none",
             },
           ]}
           onPress={() => {

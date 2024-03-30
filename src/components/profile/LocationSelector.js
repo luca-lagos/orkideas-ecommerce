@@ -14,11 +14,15 @@ import colorCollection from "../../utils/global/colors";
 import fonts from "../../utils/global/fonts";
 import { Icon } from "react-native-elements";
 
-const LocationSelector = ({ location, passLocation }) => {
+const LocationSelector = ({ location, onUpdate, passLocation }) => {
+  console.log(location.address);
   const [errorMessage, setErrorMessage] = useState(null);
-  const [coords, setCoords] = useState({ latitude: "", longitude: "" });
-  const [address, setAddress] = useState("");
-  const [search, setSearch] = useState("");
+  const [coords, setCoords] = useState({
+    latitude: onUpdate ? location.coords.latitude : "",
+    longitude: onUpdate ? location.coords.longitude : "",
+  });
+  const [address, setAddress] = useState(onUpdate ? location.address : "");
+  const [search, setSearch] = useState(onUpdate ? location.address : "");
   const opacity = useState(new Animated.Value(0))[0];
 
   const fadeInLoading = () => {
@@ -39,16 +43,18 @@ const LocationSelector = ({ location, passLocation }) => {
 
   useEffect(() => {
     (async () => {
-      let { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== "granted") {
-        setErrorMessage("Premission denied");
-        return;
+      if (!onUpdate) {
+        let { status } = await Location.requestForegroundPermissionsAsync();
+        if (status !== "granted") {
+          setErrorMessage("Premission denied");
+          return;
+        }
+        let result = await Location.getCurrentPositionAsync();
+        setCoords({
+          latitude: result.coords.latitude,
+          longitude: result.coords.longitude,
+        });
       }
-      let result = await Location.getCurrentPositionAsync();
-      setCoords({
-        latitude: result.coords.latitude,
-        longitude: result.coords.longitude,
-      });
     })();
   }, []);
 
@@ -93,6 +99,7 @@ const LocationSelector = ({ location, passLocation }) => {
           style={styles.searchInput}
           placeholder="Search a location..."
           onChangeText={onSearchLocation}
+          value={search}
         />
         <Pressable style={styles.searchButton} onPress={HandleConfirmLocation}>
           <Icon name="search" size={22} color={colorCollection.lightviolet} />

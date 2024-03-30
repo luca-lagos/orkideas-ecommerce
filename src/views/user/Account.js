@@ -8,27 +8,25 @@ import {
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import {
+  useGetFavsByIdQuery,
   useGetOrdersByIdQuery,
   useGetProfileQuery,
 } from "../../app/services/profileService";
-import { useGetAllOrdersQuery } from "../../app/services/profileService";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { Icon } from "react-native-elements";
 import colorCollection from "../../utils/global/colors";
 import NavigationButtons from "../../components/navigation/NavigationButtons";
 import fonts from "../../utils/global/fonts";
-import { useEffect } from "react";
 import Logout from "../modal/Logout";
 
 const Account = () => {
   const route = useRoute();
-  const profile = route.params.profile;
   const localId = route.params.localId;
   const navigation = useNavigation();
   const [logoutModal, setLogoutModal] = useState(false);
+  const { data: profile } = useGetProfileQuery(localId);
   const { data: orderById } = useGetOrdersByIdQuery(localId);
-
-  console.log(orderById);
+  const { data: favById } = useGetFavsByIdQuery(localId);
 
   return (
     <>
@@ -57,7 +55,14 @@ const Account = () => {
               ADDRESS LOCATION: {profile.location.address}
             </Text>
           </View>
-          <Pressable style={styles.editAccountButton}>
+          <Pressable
+            style={styles.editAccountButton}
+            onPress={() => {
+              navigation.navigate("EditAccount", {
+                localId: localId,
+              });
+            }}
+          >
             <Icon name="edit" size={25} color={colorCollection.lightviolet} />
           </Pressable>
         </View>
@@ -72,15 +77,17 @@ const Account = () => {
             <Icon name="work" size={35} color={colorCollection.violet} />
           </Pressable>
         )}
-        <Pressable
-          style={[styles.modalButton, { display: "none" }]}
-          onPress={() => {
-            navigation.navigate("Favs");
-          }}
-        >
-          <Text style={styles.modalButtonText}>My favs</Text>
-          <Icon name="favorite" size={35} color={colorCollection.violet} />
-        </Pressable>
+        {favById === true && (
+          <Pressable
+            style={styles.modalButton}
+            onPress={() => {
+              navigation.navigate("Favs");
+            }}
+          >
+            <Text style={styles.modalButtonText}>My favs</Text>
+            <Icon name="favorite" size={35} color={colorCollection.violet} />
+          </Pressable>
+        )}
         <Pressable
           style={styles.logoutContainer}
           onPress={() => {

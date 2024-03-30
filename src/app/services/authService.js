@@ -21,7 +21,14 @@ export const authApi = createApi({
         body: auth,
       }),
     }),
+    changePassword: builder.mutation({
+      query: (auth) => ({
+        url: `accounts:sendOobCode?key=${api_key}`,
+        method: "POST",
+        body: auth,
+      }),
+    }),
   }),
 });
 
-export const { useLoginMutation, useRegisterMutation } = authApi;
+export const { useLoginMutation, useRegisterMutation, useChangePasswordMutation } = authApi;

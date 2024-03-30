@@ -1,17 +1,25 @@
 import { Pressable, StyleSheet, Text, View, Image } from "react-native";
 import { Icon } from "react-native-elements";
-import React from "react";
+import React, { useEffect } from "react";
 import colorCollection from "../utils/global/colors";
 import fonts from "../utils/global/fonts";
 import { useNavigation } from "@react-navigation/native";
 import { useSelector } from "react-redux";
 import { useGetProfileQuery } from "../app/services/profileService";
+import { useState } from "react";
 
 const Header = ({ onHandleMenuModal, onHandleSearchModal }) => {
   const navigation = useNavigation();
   const user = useSelector((state) => state.auth);
   const cart = useSelector((state) => state.cart);
-  const { data: profile } = useGetProfileQuery(user.localId);
+  const [profile, setProfile] = useState([]);
+  const { data } = useGetProfileQuery(user.localId);
+
+  useEffect(() => {
+    setProfile(data);
+  }, []);
+
+  console.log(profile);
 
   return (
     <View style={styles.container}>

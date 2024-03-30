@@ -118,8 +118,15 @@ const Login = () => {
             }}
           >
             <Text style={styles.subLink}>
-              You do not have an account? Sign up
+              You dont have an account? Sign up
             </Text>
+          </Pressable>
+          <Pressable
+            onPress={() => {
+              navigation.navigate("Recovery");
+            }}
+          >
+            <Text style={styles.subLink}>You dont remember your password?</Text>
           </Pressable>
         </View>
       </View>

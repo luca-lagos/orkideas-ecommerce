@@ -20,6 +20,8 @@ import { fetchSession } from "../utils/db";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { setUser } from "../features/auth/authSlice";
+import EditAccount from "../views/user/EditAccount";
+import Recovery from "../views/auth/Recovery";
 
 const MainNavigator = () => {
   const Stack = createNativeStackNavigator();
@@ -72,6 +74,7 @@ const MainNavigator = () => {
             <Stack.Screen name="Account" component={Account} />
             <Stack.Screen name="Favs" component={Favs} />
             <Stack.Screen name="Orders" component={Orders} />
+            <Stack.Screen name="EditAccount" component={EditAccount}/>
           </Stack.Group>
           <Stack.Group
             screenOptions={{
@@ -80,6 +83,7 @@ const MainNavigator = () => {
           >
             <Stack.Screen name="Login" component={Login} />
             <Stack.Screen name="Register" component={Register} />
+            <Stack.Screen name="Recovery" component={Recovery}/>
           </Stack.Group>
         </Stack.Navigator>
       </SafeAreaView>
