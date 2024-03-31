@@ -27,7 +27,7 @@ const Login = () => {
   const [errorEmail, setErrorEmail] = useState("");
   const [errorPassword, setErrorPassword] = useState("");
   const [triggerLogin] = useLoginMutation();
-  const [passwordVisible, setPasswordVisible] = useState(false);
+  const [passwordVisible, setPasswordVisible] = useState(true);
 
   const onSubmit = async () => {
     try {
@@ -98,7 +98,7 @@ const Login = () => {
               onPress={() => setPasswordVisible(!passwordVisible)}
             >
               <Icon
-                name={passwordVisible ? "visibility" : "visibility-off"}
+                name={!passwordVisible ? "visibility" : "visibility-off"}
                 size={35}
                 color={colorCollection.darkviolet}
               />

@@ -49,8 +49,8 @@ const UserForm = ({ onUpdate, onRegister, profile, localId }) => {
   const [errorFullname, setErrorFullname] = useState("");
   const [triggerRegister] = useRegisterMutation();
   const [triggerProfile] = usePostProfileMutation();
-  const [passwordVisible, setPasswordVisible] = useState(false);
-  const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
+  const [passwordVisible, setPasswordVisible] = useState(true);
+  const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(true);
   const [notification, setNotification] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
@@ -202,7 +202,7 @@ const UserForm = ({ onUpdate, onRegister, profile, localId }) => {
                   onPress={() => setPasswordVisible(!passwordVisible)}
                 >
                   <Icon
-                    name={passwordVisible ? "visibility" : "visibility-off"}
+                    name={!passwordVisible ? "visibility" : "visibility-off"}
                     size={35}
                     color={colorCollection.darkviolet}
                   />
@@ -224,7 +224,7 @@ const UserForm = ({ onUpdate, onRegister, profile, localId }) => {
                 >
                   <Icon
                     name={
-                      confirmPasswordVisible ? "visibility" : "visibility-off"
+                      !confirmPasswordVisible ? "visibility" : "visibility-off"
                     }
                     size={35}
                     color={colorCollection.darkviolet}
