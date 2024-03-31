@@ -7,15 +7,34 @@ import { useNavigation } from "@react-navigation/native";
 import { useDispatch } from "react-redux";
 import { deleteSession } from "../../utils/db";
 import { clearUser } from "../../features/auth/authSlice";
+import { useDeleteFavMutation } from "../../app/services/profileService";
 
-const Logout = ({ modalVisible, passModalVisible }) => {
+const WarningModal = ({
+  modalVisible,
+  passModalVisible,
+  isLogout,
+  isDeleteFavs,
+  localId,
+}) => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
+  const [triggerDeleteFavs] = useDeleteFavMutation();
+
+  console.log(localId);
 
   const onLogout = () => {
     dispatch(clearUser());
     deleteSession();
     navigation.navigate("Home");
+  };
+
+  const onDeleteFavs = async () => {
+    try {
+      await triggerDeleteFavs(localId);
+      navigation.navigate("Home");
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -31,7 +50,11 @@ const Logout = ({ modalVisible, passModalVisible }) => {
         </Pressable>
         <View style={styles.modalMessageContainer}>
           <Icon name={"warning"} color={"white"} size={150} />
-          <Text style={styles.modalMessageTitle}>Are you sure to logout?</Text>
+          <Text style={styles.modalMessageTitle}>
+            {isLogout
+              ? "Are you sure to logout?"
+              : "Are you sure to clear your favlist?"}
+          </Text>
         </View>
         <View style={styles.navigateContainer}>
           <Pressable
@@ -52,9 +75,11 @@ const Logout = ({ modalVisible, passModalVisible }) => {
               styles.navigateButton,
               { backgroundColor: colorCollection.red },
             ]}
-            onPress={onLogout}
+            onPress={isLogout ? onLogout : onDeleteFavs}
           >
-            <Text style={styles.navigateTitle}>logout</Text>
+            <Text style={styles.navigateTitle}>
+              {isLogout ? "logout" : "clear"}
+            </Text>
           </Pressable>
         </View>
       </View>
@@ -62,7 +87,7 @@ const Logout = ({ modalVisible, passModalVisible }) => {
   );
 };
 
-export default Logout;
+export default WarningModal;
 
 const styles = StyleSheet.create({
   container: {

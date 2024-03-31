@@ -11,17 +11,16 @@ import NavigationButtons from "../../components/navigation/NavigationButtons";
 import { useSelector } from "react-redux";
 import { useGetAllFavsQuery } from "../../app/services/profileService";
 import colorCollection from "../../utils/global/colors";
-import OrderDetail from "../modal/OrderDetail";
 import { Icon } from "react-native-elements";
-import FavItem from "../../components/profile/FavItem";
-import { useNavigation } from "@react-navigation/native";
+import WarningModal from "../modal/WarningModal";
+import ProductCard from "../../components/shop/ProductCard";
+import { useRoute } from "@react-navigation/native";
 
 const Favs = () => {
-  const navigation = useNavigation();
-  const user = useSelector((state) => state.auth);
-  const { data: favs } = useGetAllFavsQuery(user.localId);
-  console.log(favs);
-
+  const route = useRoute();
+  const [deleteFavsModal, setDeleteFavsModal] = useState(false);
+  const localId = route.params.localId;
+  const { data: favs } = useGetAllFavsQuery(localId);
   return (
     <>
       <View style={styles.container}>
@@ -45,15 +44,11 @@ const Favs = () => {
             showsVerticalScrollIndicator={true}
             renderItem={({ item }) => {
               return (
-                <Pressable
-                  onPress={() => {
-                    navigation.navigate("ProductDetail", {
-                      productId: item.id,
-                    });
-                  }}
-                >
-                  <FavItem item={item} localId={user.localId} />
-                </Pressable>
+                <ProductCard
+                  item={item}
+                  onHandleSearchModal={null}
+                  onSlider={false}
+                />
               );
             }}
             keyExtractor={(item) => item.id}
@@ -64,7 +59,22 @@ const Favs = () => {
             <Text style={styles.notFoundText}>Favs not found</Text>
           </View>
         )}
+        <Pressable
+          style={styles.deleteFavsContainer}
+          onPress={() => {
+            setDeleteFavsModal(true);
+          }}
+        >
+          <Text style={styles.deleteFavsTitle}>CLEAR LIST</Text>
+        </Pressable>
       </View>
+      <WarningModal
+        modalVisible={deleteFavsModal}
+        passModalVisible={setDeleteFavsModal}
+        isLogout={false}
+        isDeleteFavs={true}
+        localId={localId}
+      />
     </>
   );
 };
@@ -135,5 +145,24 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: colorCollection.darkviolet,
     textAlign: "center",
+  },
+  deleteFavsContainer: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: colorCollection.red,
+    height: 60,
+    padding: 15,
+    marginVertical: 10,
+    marginHorizontal: 20,
+    borderRadius: 10,
+    elevation: 5,
+  },
+  deleteFavsTitle: {
+    fontSize: 17,
+    fontWeight: "bold",
+    textTransform: "uppercase",
+    color: colorCollection.white,
   },
 });

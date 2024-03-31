@@ -17,7 +17,7 @@ import { Icon } from "react-native-elements";
 import colorCollection from "../../utils/global/colors";
 import NavigationButtons from "../../components/navigation/NavigationButtons";
 import fonts from "../../utils/global/fonts";
-import Logout from "../modal/Logout";
+import WarningModal from "../modal/WarningModal";
 
 const Account = () => {
   const route = useRoute();
@@ -35,7 +35,7 @@ const Account = () => {
         <View style={styles.account}>
           <ImageBackground
             style={styles.userImage}
-            source={{ uri: profile.userImage }}
+            source={{ uri: profile?.userImage }}
             resizeMode="cover"
             imageStyle={{
               borderColor: colorCollection.lightviolet,
@@ -50,9 +50,9 @@ const Account = () => {
             </View>
           </ImageBackground>
           <View style={styles.textContainer}>
-            <Text style={styles.text}>FULLNAME: {profile.fullname}</Text>
+            <Text style={styles.text}>FULLNAME: {profile?.fullname}</Text>
             <Text style={styles.text}>
-              ADDRESS LOCATION: {profile.location.address}
+              ADDRESS LOCATION: {profile?.location.address}
             </Text>
           </View>
           <Pressable
@@ -81,7 +81,7 @@ const Account = () => {
           <Pressable
             style={styles.modalButton}
             onPress={() => {
-              navigation.navigate("Favs");
+              navigation.navigate("Favs", {localId: localId});
             }}
           >
             <Text style={styles.modalButtonText}>My favs</Text>
@@ -97,7 +97,12 @@ const Account = () => {
           <Text style={styles.logoutTitle}>LOGOUT</Text>
         </Pressable>
       </View>
-      <Logout modalVisible={logoutModal} passModalVisible={setLogoutModal} />
+      <WarningModal
+        modalVisible={logoutModal}
+        passModalVisible={setLogoutModal}
+        isLogout={true}
+        isDeleteFavs={false}
+      />
     </>
   );
 };

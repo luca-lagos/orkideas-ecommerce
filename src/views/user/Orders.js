@@ -24,8 +24,6 @@ const Orders = () => {
     setModalOrderVisible(false);
   }, []);
 
-  console.log(orders);
-
   const HandleOpenModal = (item) => {
     setOrderDetail(item);
     setModalOrderVisible(true);

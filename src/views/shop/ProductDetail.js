@@ -35,7 +35,6 @@ const ProductDetail = () => {
   const [triggerAddFav] = usePostFavMutation();
   const { data: favs } = useGetAllFavsQuery(localId);
   const validateFav = favs?.find((e) => e?.id == productByIdRD?.id);
-  const [productFav, setProductFav] = useState(false);
   const [notification, setNotification] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
@@ -43,22 +42,17 @@ const ProductDetail = () => {
   const [navigate, setNavigate] = useState(null);
 
   console.log(validateFav);
+  console.log(localId);
 
   const onHandleFav = async () => {
-    setProductFav(!productFav);
-    if (localId != "" || undefined) {
-      if (productFav) {
-        triggerAddFav({ localId: localId, product: productByIdRD });
-        setNotification(true);
-        setTitle("Product added to favorites");
-        setSuccess(true);
-        setError(false);
-        setNavigate("Favs");
-      } else {
-        triggerDelFav({ localId: localId, productId });
-      }
+    if (localId !== undefined) {
+      triggerAddFav({ localId: localId, product: productByIdRD });
+      setNotification(true);
+      setTitle("Product added to favorites");
+      setSuccess(true);
+      setError(false);
+      setNavigate("Favs");
     } else {
-      setProductFav(false);
       navigation.navigate("Login");
     }
   };
