@@ -19,8 +19,6 @@ const Header = ({ onHandleMenuModal, onHandleSearchModal }) => {
     setProfile(data);
   }, []);
 
-  console.log(profile);
-
   return (
     <View style={styles.container}>
       <View style={styles.header}>

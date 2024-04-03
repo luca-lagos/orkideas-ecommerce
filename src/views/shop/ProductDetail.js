@@ -41,12 +41,9 @@ const ProductDetail = () => {
   const [title, setTitle] = useState(null);
   const [navigate, setNavigate] = useState(null);
 
-  console.log(validateFav);
-  console.log(localId);
-
   const onHandleFav = async () => {
     if (localId !== undefined) {
-      triggerAddFav({ localId: localId, product: productByIdRD });
+      await triggerAddFav({ localId: localId, product: productByIdRD });
       setNotification(true);
       setTitle("Product added to favorites");
       setSuccess(true);

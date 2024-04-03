@@ -73,7 +73,7 @@ export const profileApi = createApi({
     }),
     deleteFav: builder.mutation({
       query: (localId) => ({
-        url: `favs/${localId}.json"`,
+        url: `favs/${localId}.json`,
         method: "DELETE",
       }),
       invalidatesTags: ["Favs"],

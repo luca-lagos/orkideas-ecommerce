@@ -21,7 +21,8 @@ import WarningModal from "../modal/WarningModal";
 
 const Account = () => {
   const route = useRoute();
-  const localId = route.params.localId;
+  const user = useSelector((state) => state.auth);
+  const localId = user.localId;/*route.params.localId*/;
   const navigation = useNavigation();
   const [logoutModal, setLogoutModal] = useState(false);
   const { data: profile } = useGetProfileQuery(localId);

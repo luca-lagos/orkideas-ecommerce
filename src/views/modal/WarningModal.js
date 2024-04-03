@@ -7,7 +7,10 @@ import { useNavigation } from "@react-navigation/native";
 import { useDispatch } from "react-redux";
 import { deleteSession } from "../../utils/db";
 import { clearUser } from "../../features/auth/authSlice";
-import { useDeleteFavMutation } from "../../app/services/profileService";
+import {
+  useDeleteFavMutation,
+  useGetAllFavsQuery,
+} from "../../app/services/profileService";
 
 const WarningModal = ({
   modalVisible,
@@ -19,8 +22,7 @@ const WarningModal = ({
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const [triggerDeleteFavs] = useDeleteFavMutation();
-
-  console.log(localId);
+  const { refetch } = useGetAllFavsQuery(localId);
 
   const onLogout = () => {
     dispatch(clearUser());
@@ -29,12 +31,9 @@ const WarningModal = ({
   };
 
   const onDeleteFavs = async () => {
-    try {
-      await triggerDeleteFavs(localId);
-      navigation.navigate("Home");
-    } catch (err) {
-      console.log(err);
-    }
+    await triggerDeleteFavs(localId);
+    refetch();
+    navigation.navigate("Account");
   };
 
   return (

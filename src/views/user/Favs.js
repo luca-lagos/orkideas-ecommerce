@@ -19,7 +19,8 @@ import { useRoute } from "@react-navigation/native";
 const Favs = () => {
   const route = useRoute();
   const [deleteFavsModal, setDeleteFavsModal] = useState(false);
-  const localId = route.params.localId;
+  const user = useSelector((state) => state.auth);
+  const localId = user.localId; /*route.params.localId;*/
   const { data: favs } = useGetAllFavsQuery(localId);
   return (
     <>
