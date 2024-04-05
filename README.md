@@ -1,7 +1,7 @@
 # Orkideas Unofficial Ecommerce
 ## Proyecto final de React Native
 
-![Home](https://asset.cloudinary.com/lucalagos/509cfbd9e66eb9878277330ffcde4690)
+![Home](https://res.cloudinary.com/lucalagos/image/upload/v1712326821/orkideas-ecommerce/logos_coderhouse_swcuwv.png)
 
 ### Descripcion
 
@@ -27,38 +27,37 @@ La aplicacion posee las siguientes funcionalidades:
 #### Inicio
 
 <div>
-    <img src="https://asset.cloudinary.com/lucalagos/fcabd495e474777fc3739069f7bcd550"/>
+    <img src="https://res.cloudinary.com/lucalagos/image/upload/v1712326822/orkideas-ecommerce/home_w5tobn.png"/>
 </div>
 
 #### Autenticacion
 
 <div>
-    <img src="https://asset.cloudinary.com/lucalagos/d840d0a381dcaeba25cfe5df3fb6595e"/>
-    <img src="https://asset.cloudinary.com/lucalagos/77d2ec6c0217f811350eedb5ad3bd211"/>
-    <img src="https://asset.cloudinary.com/lucalagos/443645bd2a06aeb2a6b713f9e3dd51fd"/>
-    <img src="https://asset.cloudinary.com/lucalagos/d81b37502e5eddfc907d4a66e2020788"/>
-    <img src="https://asset.cloudinary.com/lucalagos/ad8b10c5806e81d3aef4c03e1f8bf53b"/>
+    <img src="https://res.cloudinary.com/lucalagos/image/upload/v1712326822/orkideas-ecommerce/login_i7fci7.png"/>
+    <img src="https://res.cloudinary.com/lucalagos/image/upload/v1712326827/orkideas-ecommerce/register_moxvio.png"/>
+    <img src="https://res.cloudinary.com/lucalagos/image/upload/v1712326827/orkideas-ecommerce/register2_ghn4rg.png"/>
+    <img src="https://res.cloudinary.com/lucalagos/image/upload/v1712326822/orkideas-ecommerce/change-password_o1e8dl.png"/>
 </div>
 
 #### Productos
 
 <div>
-    <img src="https://asset.cloudinary.com/lucalagos/8135d865a77261c7f4975d4b980d46cf"/>
-    <img src="https://asset.cloudinary.com/lucalagos/a410b060c2dce0d28ae398745ea017c6"/>
-    <img src="https://asset.cloudinary.com/lucalagos/86b7ac2168232061bfcad2d4099fc712"/>
-    <img src="https://asset.cloudinary.com/lucalagos/997abc296eeff46311364abf5d5ada86"/>
-    <img src="https://asset.cloudinary.com/lucalagos/a92be8d0a9868d63cbed96526f42bb75"/>
+    <img src="https://res.cloudinary.com/lucalagos/image/upload/v1712326822/orkideas-ecommerce/modal-searcher_rnu3cd.png"/>
+    <img src="https://res.cloudinary.com/lucalagos/image/upload/v1712326822/orkideas-ecommerce/modal-category_mqr24z.png"/>
+    <img src="https://res.cloudinary.com/lucalagos/image/upload/v1712326827/orkideas-ecommerce/products-by-category_gqxfxm.png"/>
+    <img src="https://res.cloudinary.com/lucalagos/image/upload/v1712326826/orkideas-ecommerce/product-detail_jjtag9.png"/>
+    <img src="https://res.cloudinary.com/lucalagos/image/upload/v1712326828/orkideas-ecommerce/shopping-cart_xqougy.png"/>
 </div>
 
 #### Mi cuenta
 
 <div>
-    <img src="https://asset.cloudinary.com/lucalagos/1be433156aa3c40e11f72b0dff464732"/>
-    <img src="https://asset.cloudinary.com/lucalagos/9f0c6df46b7d184fcc2b7c728d862625"/>
-    <img src="https://asset.cloudinary.com/lucalagos/c272085c48b4d0e2ee0c2039152c2249"/>
-    <img src="https://asset.cloudinary.com/lucalagos/a356948b5bc7499feec105b8a24cadb6"/>
-    <img src="https://asset.cloudinary.com/lucalagos/49c23417dc7034254042ae36bf2444fd"/>
-    <img src="https://asset.cloudinary.com/lucalagos/4a7175561546d95aa58f4143c4b7bdfb"/>
+    <img src="https://res.cloudinary.com/lucalagos/image/upload/v1712326823/orkideas-ecommerce/my-profile_rv0kuw.png"/>
+    <img src="https://res.cloudinary.com/lucalagos/image/upload/v1712326828/orkideas-ecommerce/update-account_yukbf5.png"/>
+    <img src="https://res.cloudinary.com/lucalagos/image/upload/v1712326828/orkideas-ecommerce/update-account2_y7n83z.png"/>
+    <img src="https://res.cloudinary.com/lucalagos/image/upload/v1712326823/orkideas-ecommerce/my-favs_nmnvmj.png"/>
+    <img src="https://res.cloudinary.com/lucalagos/image/upload/v1712326823/orkideas-ecommerce/my-orders_v8sdud.png"/>
+    <img src="https://res.cloudinary.com/lucalagos/image/upload/v1712326824/orkideas-ecommerce/order-detail_ycp1ro.png"/>
 </div>
 
 ### Tecnologías utilizadas
