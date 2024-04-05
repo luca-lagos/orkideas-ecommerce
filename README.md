@@ -32,7 +32,7 @@ La aplicacion posee las siguientes funcionalidades:
 
 #### Autenticacion
 
-<div>
+<div style="display: flex; flex-direction: row; gap: 25">
     <img src="https://res.cloudinary.com/lucalagos/image/upload/v1712326822/orkideas-ecommerce/login_i7fci7.png" width="250"/>
     <img src="https://res.cloudinary.com/lucalagos/image/upload/v1712326827/orkideas-ecommerce/register_moxvio.png" width="250"/>
     <img src="https://res.cloudinary.com/lucalagos/image/upload/v1712326827/orkideas-ecommerce/register2_ghn4rg.png" width="250"/>
@@ -52,12 +52,12 @@ La aplicacion posee las siguientes funcionalidades:
 #### Mi cuenta
 
 <div>
-    <img src="https://res.cloudinary.com/lucalagos/image/upload/v1712326823/orkideas-ecommerce/my-profile_rv0kuw.png"/>
-    <img src="https://res.cloudinary.com/lucalagos/image/upload/v1712326828/orkideas-ecommerce/update-account_yukbf5.png"/>
-    <img src="https://res.cloudinary.com/lucalagos/image/upload/v1712326828/orkideas-ecommerce/update-account2_y7n83z.png"/>
-    <img src="https://res.cloudinary.com/lucalagos/image/upload/v1712326823/orkideas-ecommerce/my-favs_nmnvmj.png"/>
-    <img src="https://res.cloudinary.com/lucalagos/image/upload/v1712326823/orkideas-ecommerce/my-orders_v8sdud.png"/>
-    <img src="https://res.cloudinary.com/lucalagos/image/upload/v1712326824/orkideas-ecommerce/order-detail_ycp1ro.png"/>
+    <img src="https://res.cloudinary.com/lucalagos/image/upload/v1712326823/orkideas-ecommerce/my-profile_rv0kuw.png" width="250"/>
+    <img src="https://res.cloudinary.com/lucalagos/image/upload/v1712326828/orkideas-ecommerce/update-account_yukbf5.png" width="250"/>
+    <img src="https://res.cloudinary.com/lucalagos/image/upload/v1712326828/orkideas-ecommerce/update-account2_y7n83z.png" width="250"/>
+    <img src="https://res.cloudinary.com/lucalagos/image/upload/v1712326823/orkideas-ecommerce/my-favs_nmnvmj.png" width="250"/>
+    <img src="https://res.cloudinary.com/lucalagos/image/upload/v1712326823/orkideas-ecommerce/my-orders_v8sdud.png" width="250"/>
+    <img src="https://res.cloudinary.com/lucalagos/image/upload/v1712326824/orkideas-ecommerce/order-detail_ycp1ro.png" width="250"/>
 </div>
 
 ### Tecnologías utilizadas
