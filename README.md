@@ -27,26 +27,26 @@ La aplicacion posee las siguientes funcionalidades:
 #### Inicio
 
 <div>
-    <img src="https://res.cloudinary.com/lucalagos/image/upload/v1712326822/orkideas-ecommerce/home_w5tobn.png" width="300"/>
+    <img src="https://res.cloudinary.com/lucalagos/image/upload/v1712326822/orkideas-ecommerce/home_w5tobn.png" width="250"/>
 </div>
 
 #### Autenticacion
 
 <div>
-    <img src="https://res.cloudinary.com/lucalagos/image/upload/v1712326822/orkideas-ecommerce/login_i7fci7.png" width="500"/>
-    <img src="https://res.cloudinary.com/lucalagos/image/upload/v1712326827/orkideas-ecommerce/register_moxvio.png" width="500"/>
-    <img src="https://res.cloudinary.com/lucalagos/image/upload/v1712326827/orkideas-ecommerce/register2_ghn4rg.png" width="500"/>
-    <img src="https://res.cloudinary.com/lucalagos/image/upload/v1712326822/orkideas-ecommerce/change-password_o1e8dl.png" width="500"/>
+    <img src="https://res.cloudinary.com/lucalagos/image/upload/v1712326822/orkideas-ecommerce/login_i7fci7.png" width="250"/>
+    <img src="https://res.cloudinary.com/lucalagos/image/upload/v1712326827/orkideas-ecommerce/register_moxvio.png" width="250"/>
+    <img src="https://res.cloudinary.com/lucalagos/image/upload/v1712326827/orkideas-ecommerce/register2_ghn4rg.png" width="250"/>
+    <img src="https://res.cloudinary.com/lucalagos/image/upload/v1712326822/orkideas-ecommerce/change-password_o1e8dl.png" width="250"/>
 </div>
 
 #### Productos
 
 <div>
-    <img src="https://res.cloudinary.com/lucalagos/image/upload/v1712326822/orkideas-ecommerce/modal-searcher_rnu3cd.png" width="500"/>
-    <img src="https://res.cloudinary.com/lucalagos/image/upload/v1712326822/orkideas-ecommerce/modal-category_mqr24z.png" width="500"/>
-    <img src="https://res.cloudinary.com/lucalagos/image/upload/v1712326827/orkideas-ecommerce/products-by-category_gqxfxm.png" width="500"/>
-    <img src="https://res.cloudinary.com/lucalagos/image/upload/v1712326826/orkideas-ecommerce/product-detail_jjtag9.png" width="500"/>
-    <img src="https://res.cloudinary.com/lucalagos/image/upload/v1712326828/orkideas-ecommerce/shopping-cart_xqougy.png" width="500"/>
+    <img src="https://res.cloudinary.com/lucalagos/image/upload/v1712326822/orkideas-ecommerce/modal-searcher_rnu3cd.png" width="250"/>
+    <img src="https://res.cloudinary.com/lucalagos/image/upload/v1712326822/orkideas-ecommerce/modal-category_mqr24z.png" width="250"/>
+    <img src="https://res.cloudinary.com/lucalagos/image/upload/v1712326827/orkideas-ecommerce/products-by-category_gqxfxm.png" width="250"/>
+    <img src="https://res.cloudinary.com/lucalagos/image/upload/v1712326826/orkideas-ecommerce/product-detail_jjtag9.png" width="250"/>
+    <img src="https://res.cloudinary.com/lucalagos/image/upload/v1712326828/orkideas-ecommerce/shopping-cart_xqougy.png" width="250"/>
 </div>
 
 #### Mi cuenta
