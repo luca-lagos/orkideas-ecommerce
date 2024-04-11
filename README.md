@@ -32,7 +32,7 @@ La aplicacion posee las siguientes funcionalidades:
 
 #### Autenticacion
 
-<div style="display: flex; flex-direction: row; gap: 25">
+<div>
     <img src="https://res.cloudinary.com/lucalagos/image/upload/v1712326822/orkideas-ecommerce/login_i7fci7.png" width="250"/>
     <img src="https://res.cloudinary.com/lucalagos/image/upload/v1712326827/orkideas-ecommerce/register_moxvio.png" width="250"/>
     <img src="https://res.cloudinary.com/lucalagos/image/upload/v1712326827/orkideas-ecommerce/register2_ghn4rg.png" width="250"/>

@@ -4,6 +4,7 @@ import {
   View,
   ImageBackground,
   Pressable,
+  ScrollView,
 } from "react-native";
 import React from "react";
 import InputForm from "../../components/auth/InputForm";
@@ -52,7 +53,7 @@ const Recovery = () => {
 
   return (
     <>
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         <NavigationButtons />
         <View style={styles.form}>
           <ImageBackground
@@ -92,7 +93,7 @@ const Recovery = () => {
             </Pressable>
           </View>
         </View>
-      </View>
+      </ScrollView>
       <Notification
         modalVisible={notification}
         title={title}

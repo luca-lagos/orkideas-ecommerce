@@ -4,6 +4,7 @@ import {
   View,
   Pressable,
   ActivityIndicator,
+  ScrollView,
 } from "react-native";
 import React from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
@@ -42,7 +43,8 @@ const ProductDetail = () => {
   const [navigate, setNavigate] = useState(null);
 
   const onHandleFav = async () => {
-    if (localId !== undefined) {
+    console.log(localId);
+    if (localId != undefined) {
       await triggerAddFav({ localId: localId, product: productByIdRD });
       setNotification(true);
       setTitle("Product added to favorites");
@@ -68,7 +70,7 @@ const ProductDetail = () => {
 
   return (
     <>
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         <NavigationButtons />
         <View style={styles.productContainer}>
           <View style={styles.titleContainer}>
@@ -88,7 +90,7 @@ const ProductDetail = () => {
           <Slider images={productByIdRD.images} categoryLink={false} />
           <AddCartItemButton initialValue={1} product={productByIdRD} />
         </View>
-      </View>
+      </ScrollView>
       <Notification
         modalVisible={notification}
         title={title}

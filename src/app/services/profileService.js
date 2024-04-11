@@ -30,7 +30,7 @@ export const profileApi = createApi({
     getOrdersById: builder.query({
       query: (localId) => `orders/${localId}.json`,
       transformResponse: (response) => {
-        if (response === null) {
+        if (response == null || undefined) {
           return false;
         }
         return true;
@@ -39,7 +39,7 @@ export const profileApi = createApi({
     getFavsById: builder.query({
       query: (localId) => `favs/${localId}.json`,
       transformResponse: (response) => {
-        if (response === null) {
+        if (response == null || undefined) {
           return false;
         }
         return true;
@@ -48,6 +48,9 @@ export const profileApi = createApi({
     getAllOrders: builder.query({
       query: (localId) => `orders/${localId}.json`,
       transformResponse: (response) => {
+        if(response == null || undefined) {
+          return null;
+        }
         const data = Object.entries(response).map((item) => {
           return {
             id: item[0],
@@ -61,6 +64,9 @@ export const profileApi = createApi({
     getAllFavs: builder.query({
       query: (localId) => `favs/${localId}.json`,
       transformResponse: (response) => {
+        if (response == null || undefined) {
+          return null;
+        }
         const data = Object.entries(response).map((item) => {
           return {
             id: item[0],

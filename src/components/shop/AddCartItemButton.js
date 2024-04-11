@@ -16,7 +16,18 @@ const AddCartItemButton = ({ initialValue, product }) => {
   const [navigate, setNavigate] = useState(null);
   const dispatch = useDispatch();
   const HandleAddCartItem = (quantity) => {
-    dispatch(addCartItem({ ...product, quantity }));
+    const productToCart = {
+      id: product.id,
+      title: product.title,
+      description: product.description,
+      picture_url: product.thumbnail,
+      category_id: product.category,
+      currency_id: "$",
+      unit_price: product.price,
+    };
+    console.log(product);
+    console.log(productToCart);
+    dispatch(addCartItem({ ...productToCart, quantity }));
     setSuccess(true);
     setError(false);
     setTitle("Product added successfully");

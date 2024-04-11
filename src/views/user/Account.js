@@ -22,12 +22,15 @@ import WarningModal from "../modal/WarningModal";
 const Account = () => {
   const route = useRoute();
   const user = useSelector((state) => state.auth);
-  const localId = user.localId;/*route.params.localId*/;
+  const localId = user.localId;
   const navigation = useNavigation();
   const [logoutModal, setLogoutModal] = useState(false);
   const { data: profile } = useGetProfileQuery(localId);
   const { data: orderById } = useGetOrdersByIdQuery(localId);
   const { data: favById } = useGetFavsByIdQuery(localId);
+
+  console.log(orderById);
+  console.log(favById);
 
   return (
     <>

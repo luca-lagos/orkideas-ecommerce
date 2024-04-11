@@ -11,13 +11,13 @@ const CartItem = ({ item }) => {
 
   return (
     <View style={styles.container}>
-      <Image style={styles.image} src={item.thumbnail} />
+      <Image style={styles.image} src={item.picture_url} />
       <View style={styles.info}>
         <Text style={styles.title} numberOfLines={1}>
           {item.title}
         </Text>
         <View style={styles.priceContainer}>
-          <Text style={styles.price}>${item.price}</Text>
+          <Text style={styles.price}>${item.unit_price}</Text>
           <Text style={styles.quantity}>QUANT: {item.quantity}</Text>
         </View>
       </View>

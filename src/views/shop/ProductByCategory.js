@@ -22,7 +22,7 @@ const ProductByCategory = () => {
 
   useEffect(() => {
     if (categorySelected) {
-      const newData = products.filter(
+      const newData = products?.filter(
         (item) => item.category === categorySelected
       );
       setProductListByCategory(newData);

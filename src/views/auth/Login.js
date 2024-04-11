@@ -4,6 +4,7 @@ import {
   View,
   ImageBackground,
   Pressable,
+  ScrollView,
 } from "react-native";
 import React from "react";
 import InputForm from "../../components/auth/InputForm";
@@ -61,7 +62,7 @@ const Login = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <NavigationButtons />
       <View style={styles.form}>
         <ImageBackground
@@ -130,7 +131,7 @@ const Login = () => {
           </Pressable>
         </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 

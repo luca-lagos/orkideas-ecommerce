@@ -12,6 +12,8 @@ import { useState } from "react";
 import Notification from "../../components/notifications/Notification";
 import { deleteCart } from "../../features/cart/cartSlice";
 import { useNavigation } from "@react-navigation/native";
+import { HandleIntegrateMP } from "../../utils/payment/MPIntegration";
+import { openBrowserAsync } from "expo-web-browser";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -44,6 +46,15 @@ const Cart = () => {
     }
   };
 
+  const HandleOpenMP = async () => {
+    const data = await HandleIntegrateMP(cart.items);
+    if (!data) {
+      return console.log("HUBO UN ERROR");
+    } else {
+      openBrowserAsync(data);
+    }
+  };
+
   return (
     <>
       <View style={styles.container}>
@@ -66,7 +77,7 @@ const Cart = () => {
                   ${cart.total}
                 </Text>
               </View>
-              <Pressable style={styles.confirmButton} onPress={HandleAddOrder}>
+              <Pressable style={styles.confirmButton} onPress={HandleOpenMP}>
                 <Text
                   style={[
                     styles.cartText,
@@ -81,9 +92,7 @@ const Cart = () => {
         ) : (
           <View style={styles.notFoundView}>
             <Icon name="help" size={120} color={colorCollection.darkviolet} />
-            <Text style={styles.notFoundText}>
-              Products not found
-            </Text>
+            <Text style={styles.notFoundText}>Products not found</Text>
           </View>
         )}
       </View>
